@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_badge"
+            android:title="Patient Info" />
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_airline_seat_individual_suite"
+            android:title="Patient Health Record" />
+        <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/ic_history_3"
+            android:title="Prescribed MEDS" />
+        <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/ic_accessibility"
+            android:title="Allergic info" />
+        <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/ic_history_2"
+            android:title="Past Symptons" />
+        <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/ic_history"
+            android:title="Past History" />
+
+    </group>
+</menu>
