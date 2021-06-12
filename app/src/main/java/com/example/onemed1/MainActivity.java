@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     boolean isValid = false;
     FloatingActionButton fab;
     Spinner spinner;
+    public static final String USER_NAME = "com.example.onemed1.username";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,8 +102,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     if(isValid==true)
                     {
                         Toast.makeText(MainActivity.this, "Login Successfull", Toast.LENGTH_SHORT).show();
-//                                Intent intent = new Intent(MainActivity.this, Homepageactivity.class);
-//                                startActivity(intent);
+                                Intent intent = new Intent(MainActivity.this, Homepage_activity.class);
+                                intent.putExtra(USER_NAME, inputname);
+                                startActivity(intent);
                     }
                     else
                     {
