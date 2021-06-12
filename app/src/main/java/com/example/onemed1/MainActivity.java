@@ -1,5 +1,7 @@
 package com.example.onemed1;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
@@ -8,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -22,8 +25,11 @@ import com.example.onemed1.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
+    FloatingActionButton fab;
+    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +56,29 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-        Spinner spinner = findViewById(R.id.spinner);
+        spinner = findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
-    }
+        fab = findViewById(R.id.fab);
+                fab.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String urlText = "Its a sos";
+                        Toast.makeText(MainActivity.this, "Hey sending a Mail", Toast.LENGTH_SHORT).show();
+                        String[] addresses = {"k.nirmalkumar2002@gmail.com", "cst.20bcta16@silicon.ac.in"};
+                        Intent intent = new Intent(Intent.ACTION_SEND);
+                        intent.setType("*/*");
+                        intent.putExtra(Intent.EXTRA_EMAIL, addresses);
+                        intent.putExtra(Intent.EXTRA_SUBJECT, "OneMED subject");
+                        intent.putExtra(Intent.EXTRA_TEXT, urlText);
+                        if (intent.resolveActivity(getPackageManager()) != null) {
+                            startActivity(intent);
+                        }
+                    }
+                });
+
+        }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
