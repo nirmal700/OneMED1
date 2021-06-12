@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.Menu;
 import android.widget.Adapter;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -28,6 +30,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
+    private EditText username ;
+    private EditText password;
+    private Button login;
+    private String luser ="Admin";
+    private String lpassword="12345678";
+    boolean isValid = false;
     FloatingActionButton fab;
     Spinner spinner;
 
@@ -58,6 +66,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         NavigationUI.setupWithNavController(navigationView, navController);
         spinner = findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
+        username = findViewById(R.id.username);
+        password = findViewById(R.id.password);
+        login = findViewById(R.id.login);
         fab = findViewById(R.id.fab);
                 fab.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -75,11 +86,38 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         }
                     }
                 });
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String inputname =username.getText().toString();
+                String inputpassword=password.getText().toString();
+                if(inputname.isEmpty()||inputpassword.isEmpty())
+                {
+                    Toast.makeText(MainActivity.this, "Invalid User-ID or Password", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    isValid = validate(inputname,inputpassword);
+                    if(isValid==true)
+                    {
+                        Toast.makeText(MainActivity.this, "Login Successfull", Toast.LENGTH_SHORT).show();
+//                                Intent intent = new Intent(MainActivity.this, Homepageactivity.class);
+//                                startActivity(intent);
+                    }
+                    else
+                    {
+                        Toast.makeText(MainActivity.this, "Login Unsuccessfull", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
 
-        }
+    }
 
-
-
+    private boolean validate(String name,String pass)
+    {
+        return name.equals(luser) && pass.equals(lpassword);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
