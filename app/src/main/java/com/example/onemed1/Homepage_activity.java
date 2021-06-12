@@ -12,6 +12,7 @@ public class Homepage_activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         textView = findViewById(R.id.textview3);
         Intent intent = getIntent();
         String name = intent.getStringExtra(MainActivity.USER_NAME);
