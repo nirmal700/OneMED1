@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Homepage_activity">
-
+    tools:context=".Homepage_Patient">
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textView6"
         android:layout_width="398dp"
         android:layout_height="66dp"
-        android:text="Hey! Welcome to OneMED Organisation  HOME Page"
+        android:text="Hey! Welcome to OneMED Pharmacy Patient HOME Page"
         android:textColor="#13B7C8"
         android:textSize="22dp"
         android:textStyle="bold"
@@ -22,7 +21,7 @@
         app:layout_constraintVertical_bias="0.466" />
 
     <TextView
-        android:id="@+id/textview3"
+        android:id="@+id/textview7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
@@ -34,4 +33,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.139" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -35,7 +35,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private Button login;
     private String luser ="Admin";
     private String lpassword="12345678";
-    boolean isValid = false;
+    public String snip;
+    public int sn=0;
+    int isValid = -1;
     FloatingActionButton fab;
     Spinner spinner;
     public static final String USER_NAME = "com.example.onemed1.username";
@@ -99,13 +101,31 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 else
                 {
                     isValid = validate(inputname,inputpassword);
-                    if(isValid==true)
+                    if(isValid==1)
                     {
                         Toast.makeText(MainActivity.this, "Login Successfull", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(MainActivity.this, Homepage_activity.class);
                                 intent.putExtra(USER_NAME, inputname);
                                 startActivity(intent);
+                                isValid=0;
                     }
+                    else if(isValid==2)
+                    {
+                        Toast.makeText(MainActivity.this, "Login Successfull", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MainActivity.this, Homepage_Pharmacy.class);
+                        intent.putExtra(USER_NAME, inputname);
+                        startActivity(intent);
+                        isValid=0;
+                    }
+                    else if(isValid==3)
+                    {
+                        Toast.makeText(MainActivity.this, "Login Successfull", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MainActivity.this, Homepage_Patient.class);
+                        intent.putExtra(USER_NAME, inputname);
+                        startActivity(intent);
+                        isValid=0;
+                    }
+
                     else
                     {
                         Toast.makeText(MainActivity.this, "Login Unsuccessfull", Toast.LENGTH_SHORT).show();
@@ -114,11 +134,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
-    }
-
-    private boolean validate(String name,String pass)
-    {
-        return name.equals(luser) && pass.equals(lpassword);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -137,12 +152,44 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(this, "Login in progress", Toast.LENGTH_SHORT).show();
+        snip = spinner.getSelectedItem().toString();
+        if(snip.equals("Select Login-Style"))
+        {
+            Toast.makeText(this, "Select the style you want to login", Toast.LENGTH_SHORT).show();
+        }
+        else if (snip.equals("Organisation"))
+        {
+            sn=1;
+            Toast.makeText(this, "You will be logged as organisation", Toast.LENGTH_SHORT).show();
+        }
+        else if(snip.equals("Pharmacy"))
+        {
+            sn=2;
+            Toast.makeText(this, "You will be logged as Pharmacy", Toast.LENGTH_SHORT).show();
+        }
+        else if (snip.equals("Patient"))
+        {
+            sn=3;
+            Toast.makeText(this, "You will be logged as patient", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
+        Toast.makeText(this, "Select the style you want to login on nothing selected", Toast.LENGTH_SHORT).show();
+
+    }
+    private int validate(String name,String pass)
+    {
+        if(name.equals(luser) && pass.equals(lpassword)&&sn==1)
+            return 1 ;
+        else if (name.equals(luser) && pass.equals(lpassword)&&sn==2)
+            return 2;
+        else if(name.equals(luser) && pass.equals(lpassword)&&sn==3)
+            return 3;
+        else
+            return -1;
 
     }
 }
