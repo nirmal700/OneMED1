@@ -33,9 +33,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="user@onemed.com" />
+
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bhubaneswar-760009" />
+        android:text="OneMED Pvt Ltd." />
 </LinearLayout>

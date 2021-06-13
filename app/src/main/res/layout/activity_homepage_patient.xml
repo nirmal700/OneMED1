@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Homepage_Patient">
+
     <TextView
         android:id="@+id/textView6"
         android:layout_width="398dp"
         android:layout_height="66dp"
-        android:text="Hey! Welcome to OneMED Pharmacy Patient HOME Page"
+        android:text="Hey! Welcome to OneMED Patient HOME Page"
         android:textColor="#13B7C8"
         android:textSize="22dp"
         android:textStyle="bold"

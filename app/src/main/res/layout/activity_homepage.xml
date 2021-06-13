@@ -10,7 +10,7 @@
         android:id="@+id/textView2"
         android:layout_width="398dp"
         android:layout_height="66dp"
-        android:text="Hey! Welcome to OneMED Organisation  HOME Page"
+        android:text="Hey! Welcome to OneMED Hospital  HOME Page"
         android:textColor="#13B7C8"
         android:textSize="22dp"
         android:textStyle="bold"
