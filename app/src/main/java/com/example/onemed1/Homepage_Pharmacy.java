@@ -13,7 +13,7 @@ TextView textView;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage_pharmacy);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        textView = findViewById(R.id.textview5);
+        textView = findViewById(R.id.textView5);
         Intent intent = getIntent();
         String name = intent.getStringExtra(MainActivity.USER_NAME);
         textView.setText("Hi! Mr.  " + name);
