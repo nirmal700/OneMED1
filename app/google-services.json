@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "630990863101",
+    "project_id": "onemed-f3458",
+    "storage_bucket": "onemed-f3458.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:630990863101:android:f494449370351cf0eb5c94",
+        "android_client_info": {
+          "package_name": "com.example.onemed1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "630990863101-tf54a2krh3t3ga5l0sqpihkber4q361f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmGxqs0qgFXcNQMcLCWh6WkfYIjS56niI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "630990863101-tf54a2krh3t3ga5l0sqpihkber4q361f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

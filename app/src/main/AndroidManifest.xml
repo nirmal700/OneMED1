@@ -3,6 +3,7 @@
     package="com.example.onemed1">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -11,10 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OneMED1">
-        <activity android:name=".Homepage_Patient"
-            android:parentActivityName=".MainActivity">
-        </activity>
-        <activity android:name=".Homepage_Pharmacy"
+        <activity android:name=".Register"></activity>
+        <activity
+            android:name=".Homepage_Patient"
+            android:parentActivityName=".MainActivity"></activity>
+        <activity
+            android:name=".Homepage_Pharmacy"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Homepage_activity"
