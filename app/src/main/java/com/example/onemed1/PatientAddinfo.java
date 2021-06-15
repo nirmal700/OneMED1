@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,7 +24,7 @@ public class PatientAddinfo extends AppCompatActivity {
     Button mSave, mDobbutton;
     RadioGroup mBgroup,mBtype,mGender;
     RadioButton rButton;
-    String mBg,mBt,mGen,mDobm;
+    String mBg="",mBt="",mGen="",mDobm="";
     int mDate,mMonth,mYear;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mRef;
@@ -67,18 +68,40 @@ public class PatientAddinfo extends AppCompatActivity {
         mSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String mpid, memail, mpname, mcnumber, mdob, mid;
+                String mpid, memail, mpname, mcnumber, mid;
                 mpid = mPid.getText().toString();
+                if (TextUtils.isEmpty(mpid)) {
+                    mPid.setError("Patient ID is Mandatory.");
+                    return;
+                }
                 memail = mEmail.getText().toString();
+                if (TextUtils.isEmpty(memail)) {
+                    mEmail.setError("Patient Email is Required.");
+                    return;
+                }
                 mpname = mPname.getText().toString();
+                if (TextUtils.isEmpty(mpname)) {
+                    mPname.setError("Patient Name is Required.");
+                    return;
+                }
                 mcnumber = mCnumber.getText().toString();
-                mdob = mDob.getText().toString();
+                if (TextUtils.isEmpty(mcnumber)) {
+                    mCnumber.setError("Contact Number is Required.");
+                    return;
+                }
+                if (TextUtils.isEmpty(mDobm)) {
+                    mDob.setError("Date of birth is Required.");
+                    return;
+                }
                 mid = mId.getText().toString();
+                if (TextUtils.isEmpty(mid)) {
+                    mId.setError("Patient I-D is Required.");
+                    return;
+                }
                 mRef.child(mpid).child("Patient ID").setValue(mpid);
                 mRef.child(mpid).child("Patient E-mail").setValue(memail);
                 mRef.child(mpid).child("Patient Name").setValue(mpname);
                 mRef.child(mpid).child("Patient Contact Number").setValue(mcnumber);
-                mRef.child(mpid).child("Patient DOB").setValue(mdob);
                 mRef.child(mpid).child("Patient I-D Card").setValue(mid);
                 checkbutton_bg();
                 mRef.child(mpid).child("Patient Blood Group").setValue(mBg);
