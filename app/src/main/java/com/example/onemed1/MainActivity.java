@@ -39,6 +39,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -49,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     EditText mEmail,mPassword;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mRef;
-    EditText mEmail, mPassword;
     Button mLoginBtn;
     TextView mCreateBtn, forgotTextLink;
     ProgressBar progressBar;
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 //    private String luser ="Admin";
 //    private String lpassword="12345678";
     public String snip;
-    public int sn = 0;
+    public int sn = 0,val=-1;
 
     //    int isValid = -1;
     FloatingActionButton fab;
@@ -149,17 +149,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 progressBar.setVisibility(View.VISIBLE);
 
                 // authenticate the user
-
-                if(sn==2&&validate_pharmacy(email,password)==2) {
-                    Intent intent = new Intent(MainActivity.this, Homepage_Pharmacy.class);
-                    startActivity(intent);
+                if(sn==2) {
+                    validate_pharmacy(email,password);
                 }
-                else if(sn==1&&validate_organisation(email,password)==1)
+                if(sn==1)
                 {
-                    Intent intent = new Intent(MainActivity.this, Homepage_activity.class);
-                    startActivity(intent);
+                    validate_organisation(email,password);
                 }
-                else {
+                if(sn==0) {
                     fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -219,7 +216,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 //        });
                     });
                 }
-                Toast.makeText(MainActivity.this, "Sn value"+sn, Toast.LENGTH_SHORT).show();
             }
         });
         mCreateBtn.setOnClickListener(new View.OnClickListener() {
@@ -229,50 +225,73 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
     }
-    public int validate_pharmacy(String em, String ps) {
+    public void validate_pharmacy(String em, String ps) {
         mRef.child(em).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                oEm=snapshot.child("id").getValue(String.class);
+                Map<String,Object> data = (Map<String, Object>)snapshot.getValue();
+                oEm = snapshot.child("id").getValue(String.class);
                 oPs = snapshot.child("password").getValue(String.class);
+                if (oEm != null && oPs != null) {
+                    if (oEm.equals(em) && oPs.equals(ps)) {
+                        Intent intent = new Intent(MainActivity.this, Homepage_Pharmacy.class);
+                        startActivity(intent);
+                    }
+                    else
+                    {
+                        mPassword.setError("Password maybe incorrect");
+                        mEmail.setError("User-id Maybe incorrect");
+                        progressBar.setVisibility(View.GONE);
+                        return;
+                    }
+                }
+                else
+                {
+                    mPassword.setError("Password maybe incorrect");
+                    mEmail.setError("User-id Maybe incorrect");
+                    progressBar.setVisibility(View.GONE);
+                    return;
+                }
             }
 
             @Override
             public void onCancelled(@NotNull DatabaseError error) {
-                mEmail.setError("As logging as P harmacy Password is Required.");
-                return;
-
             }
         });
-        if(oEm!=null&&oPs!=null) {
-            if (oEm.equals(em) && oPs.equals(ps)) {
-                return 2;
-            } else
-                return -1;
-        }
-        else
-            return -1;
     }
-    public int validate_organisation(String em, String ps) {
-        mRef.child(em).addListenerForSingleValueEvent(new ValueEventListener() {
+    public void validate_organisation(String em, String ps) {
+        mRef.child(em).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NotNull DataSnapshot snapshot) {
+                Map<String, Object> data = (Map<String, Object>) snapshot.getValue();
                 oEm = snapshot.child("oid").getValue(String.class);
                 oPs = snapshot.child("password").getValue(String.class);
+                if (oEm != null && oPs != null) {
+                    if (oEm.equals(em) && oPs.equals(ps)) {
+                        Intent intent = new Intent(MainActivity.this, Homepage_activity.class);
+                        startActivity(intent);
+                    }
+                    else
+                    {
+                        mPassword.setError("Password maybe incorrect");
+                        mEmail.setError("User-id Maybe incorrect");
+                        progressBar.setVisibility(View.GONE);
+                        return;
+                    }
+                }
+                else
+                {
+                    mPassword.setError("Password maybe incorrect");
+                    mEmail.setError("User-id Maybe incorrect");
+                    progressBar.setVisibility(View.GONE);
+                    return;
+                }
             }
 
             @Override
             public void onCancelled(@NotNull DatabaseError error) {
             }
         });
-
-            if (oEm.equals(em) && oPs.equals(ps)) {
-                return 1;
-            } else {
-                Toast.makeText(MainActivity.this, "oEm" + oEm, Toast.LENGTH_SHORT).show();
-                Toast.makeText(MainActivity.this, "oPs" + oPs, Toast.LENGTH_SHORT).show();
-                return -1;
-            }
     }
 
 
@@ -295,6 +314,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         snip = spinner.getSelectedItem().toString();
         if (snip.equals("Select Login-Style")) {
+            sn=0;
             Toast.makeText(this, "Select the style you want to login", Toast.LENGTH_SHORT).show();
         } else if (snip.equals("Organisation")) {
             Toast.makeText(this, "You will be logged as organisation", Toast.LENGTH_SHORT).show();
