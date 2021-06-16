@@ -58,7 +58,7 @@ public class PatientAddinfo extends AppCompatActivity {
                 DatePickerDialog dpd = new DatePickerDialog(PatientAddinfo.this, android.R.style.Theme_DeviceDefault_Dialog, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        mDobm=dayOfMonth+"/"+month+"/"+year;
+                        mDobm=dayOfMonth+"/"+(month+1)+"/"+year;
                         mDob.setText(mDobm);
                     }
                 },mYear,mMonth,mDate);

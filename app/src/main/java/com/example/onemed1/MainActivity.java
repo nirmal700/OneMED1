@@ -3,7 +3,6 @@ package com.example.onemed1;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.widget.AdapterView;
@@ -39,7 +38,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashMap;
+
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -51,19 +50,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private FirebaseDatabase mDatabase;
     private DatabaseReference mRef;
     Button mLoginBtn;
-    TextView mCreateBtn, forgotTextLink;
+    TextView mCreateBtn;
     ProgressBar progressBar;
     FirebaseAuth fAuth;
     String oEm="",oPs="";
-    //    private EditText username ;
-//    private EditText password;
-//    private Button login;
-//    private String luser ="Admin";
-//    private String lpassword="12345678";
     public String snip;
-    public int sn = 0,val=-1;
-
-    //    int isValid = -1;
+    public int sn = 0;
     FloatingActionButton fab;
     Spinner spinner;
     public static final String USER_NAME = "com.example.onemed1.username";
@@ -98,9 +90,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         NavigationUI.setupWithNavController(navigationView, navController);
         spinner = findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
-//        username = findViewById(R.id.Email);
-//        password = findViewById(R.id.password);
-//        login = findViewById(R.id.loginBtn);
         mEmail = findViewById(R.id.Email);
         mPassword = findViewById(R.id.password);
         progressBar = findViewById(R.id.progressBar);
@@ -109,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         mCreateBtn = findViewById(R.id.createText);
         fab = findViewById(R.id.fab);
         progressBar.setVisibility(View.GONE);
+        //Intent of sending the email when the user clicks the sos button
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
             }
         });
+        //On clicking the login button the use will be re-directed to the selected login homepage
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -149,13 +140,28 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
                 // authenticate the user
                 if(sn==2) {
-                    validate_pharmacy(email,password);
+                    //chekcing the login id and password for the pharmacy and the login for organisation should always be numeric
+                    if(TextUtils.isDigitsOnly(email))
+                        validate_pharmacy(email, password);
+                    else
+                    {
+                        mEmail.setError("For organisation and the pharmacy the email should only be numeric");
+                        return;
+                    }
                 }
                 if(sn==1)
                 {
+                    //chekcing the login id and password for the organisation and the login for organisation should always be numeric
+                    if(TextUtils.isDigitsOnly(email))
                     validate_organisation(email,password);
+                    else
+                    {
+                        mEmail.setError("For organisation and the pharmacy the email should only be numeric");
+                        return;
+                    }
                 }
-                if(sn==0) {
+                if(sn==0||sn==3) {
+                    //comparing the entered user id and password with the registered user in the firebase and autheticating the login process for the patient
                     fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -169,54 +175,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                             }
 
                         }
-//        login.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String inputname =username.getText().toString();
-//                String inputpassword=password.getText().toString();
-//                if(inputname.isEmpty()||inputpassword.isEmpty())
-//                {
-//                    Toast.makeText(MainActivity.this, "Invalid User-ID or Password", Toast.LENGTH_SHORT).show();
-//                }
-//                else
-//                {
-//                    isValid = validate(inputname,inputpassword);
-//                    if(isValid==1)
-//                    {
-//                        Toast.makeText(MainActivity.this, "Login Successfull", Toast.LENGTH_SHORT).show();
-//                                Intent intent = new Intent(MainActivity.this, Homepage_activity.class);
-//                                intent.putExtra(USER_NAME, inputname);
-//                                startActivity(intent);
-//                                isValid=0;
-//                    }
-//                    else if(isValid==2)
-//                    {
-//                        Toast.makeText(MainActivity.this, "Login Successfull", Toast.LENGTH_SHORT).show();
-//                        Intent intent = new Intent(MainActivity.this, Homepage_Pharmacy.class);
-//                        intent.putExtra(USER_NAME, inputname);
-//                        startActivity(intent);
-//                        isValid=0;
-//                    }
-//                    else if(isValid==3)
-//                    {
-//                        Toast.makeText(MainActivity.this, "Login Successfull", Toast.LENGTH_SHORT).show();
-//                        Intent intent = new Intent(MainActivity.this, Homepage_Patient.class);
-//                        intent.putExtra(USER_NAME, inputname);
-//                        startActivity(intent);
-//                        isValid=0;
-//                    }
-//
-//                    else
-//                    {
-//                        Toast.makeText(MainActivity.this, "Login Unsuccessfull", Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//            }
-//        });
+
                     });
                 }
             }
         });
+        //Transferring the user to register if he doesnot have any account
         mCreateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -224,6 +188,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
     }
+    //Validating the login of the user if he is from the pharmacy by checking the user-id node with the password in the child of the parent node
     public void validate_pharmacy(String em, String ps) {
         mRef.child(em).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -233,6 +198,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 oPs = snapshot.child("password").getValue(String.class);
                 if (oEm != null && oPs != null) {
                     if (oEm.equals(em) && oPs.equals(ps)) {
+                        Toast.makeText(MainActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(MainActivity.this, Homepage_Pharmacy.class);
                         startActivity(intent);
                     }
@@ -241,7 +207,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         mPassword.setError("Password maybe incorrect");
                         mEmail.setError("User-id Maybe incorrect");
                         progressBar.setVisibility(View.GONE);
-                        return;
                     }
                 }
                 else
@@ -249,7 +214,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     mPassword.setError("Password maybe incorrect");
                     mEmail.setError("User-id Maybe incorrect");
                     progressBar.setVisibility(View.GONE);
-                    return;
                 }
             }
 
@@ -258,6 +222,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
     }
+    //Validating the login of the user if he is from the organisation by checking the user-id node with the password in the child of the parent node
     public void validate_organisation(String em, String ps) {
         mRef.child(em).addValueEventListener(new ValueEventListener() {
             @Override
@@ -267,6 +232,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 oPs = snapshot.child("password").getValue(String.class);
                 if (oEm != null && oPs != null) {
                     if (oEm.equals(em) && oPs.equals(ps)) {
+                        Toast.makeText(MainActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(MainActivity.this, Homepage_activity.class);
                         startActivity(intent);
                     }
@@ -275,7 +241,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         mPassword.setError("Password maybe incorrect");
                         mEmail.setError("User-id Maybe incorrect");
                         progressBar.setVisibility(View.GONE);
-                        return;
                     }
                 }
                 else
@@ -283,7 +248,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     mPassword.setError("Password maybe incorrect");
                     mEmail.setError("User-id Maybe incorrect");
                     progressBar.setVisibility(View.GONE);
-                    return;
                 }
             }
 
@@ -308,11 +272,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 || super.onSupportNavigateUp();
     }
 
-
+//For the snipper option choosed and updating the login-style
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         snip = spinner.getSelectedItem().toString();
-        if (snip.equals("Select Login-Style")) {
+        if(snip.equals("Select Login-Style")) {
             sn=0;
             Toast.makeText(this, "Select the style you want to login", Toast.LENGTH_SHORT).show();
         } else if (snip.equals("Organisation")) {
@@ -334,20 +298,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
-    //    private int validate(String name,String pass)
-//    {
-//        if(name.equals(luser) && pass.equals(lpassword)&&sn==1)
-//            return 1 ;
-//        else if (name.equals(luser) && pass.equals(lpassword)&&sn==2)
-//            return 2;
-//       else if(name.equals(luser) && pass.equals(lpassword)&&sn==3)
-//            return 3;
-//        else
-//            return -1;
-//
-//    }
-
-    }
+}
 
 
 
