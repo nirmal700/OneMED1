@@ -125,7 +125,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
             }
         });
-        Toast.makeText(MainActivity.this, "Sn value"+sn, Toast.LENGTH_SHORT).show();
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
