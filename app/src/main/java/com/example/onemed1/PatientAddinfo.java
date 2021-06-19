@@ -3,6 +3,7 @@ package com.example.onemed1;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -113,6 +114,8 @@ public class PatientAddinfo extends AppCompatActivity {
                 Toast.makeText(PatientAddinfo.this, "The data has been pushed Successfully", Toast.LENGTH_SHORT).show();
                 Log.d("TAG", "onClick: RadioButton Selected :"+mBg);
                 Log.d("TAG", "onClick: RadioButton Selected :"+mBt);
+                Intent intent = new Intent(PatientAddinfo.this, Homepage_activity.class);
+                startActivity(intent);
 
             }
         });
