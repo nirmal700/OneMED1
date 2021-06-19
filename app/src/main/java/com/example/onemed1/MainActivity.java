@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
     //Validating the login of the user if he is from the pharmacy by checking the user-id node with the password in the child of the parent node
     public void validate_pharmacy(String em, String ps) {
-        mRef.child(em).addListenerForSingleValueEvent(new ValueEventListener() {
+        mRef.child("Pharmacy Users").child(em).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Map<String,Object> data = (Map<String, Object>)snapshot.getValue();
@@ -211,7 +211,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
                 else
                 {
-                    mPassword.setError("Password maybe incorrect");
+                    mPassword.setError("Password incorrect");
                     mEmail.setError("User-id Maybe incorrect");
                     progressBar.setVisibility(View.GONE);
                 }
@@ -224,7 +224,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
     //Validating the login of the user if he is from the organisation by checking the user-id node with the password in the child of the parent node
     public void validate_organisation(String em, String ps) {
-        mRef.child(em).addValueEventListener(new ValueEventListener() {
+        mRef.child("Organisation Users").child(em).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NotNull DataSnapshot snapshot) {
                 Map<String, Object> data = (Map<String, Object>) snapshot.getValue();
@@ -245,7 +245,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
                 else
                 {
-                    mPassword.setError("Password maybe incorrect");
+                    mPassword.setError("Password incorrect");
                     mEmail.setError("User-id Maybe incorrect");
                     progressBar.setVisibility(View.GONE);
                 }

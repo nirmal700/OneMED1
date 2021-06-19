@@ -98,18 +98,18 @@ public class PatientAddinfo extends AppCompatActivity {
                     mId.setError("Patient I-D is Required.");
                     return;
                 }
-                mRef.child(mpid).child("Patient ID").setValue(mpid);
-                mRef.child(mpid).child("Patient E-mail").setValue(memail);
-                mRef.child(mpid).child("Patient Name").setValue(mpname);
-                mRef.child(mpid).child("Patient Contact Number").setValue(mcnumber);
-                mRef.child(mpid).child("Patient I-D Card").setValue(mid);
+                mRef.child("Patient Info").child(mpid).child("Patient ID").setValue(mpid);
+                mRef.child("Patient Info").child(mpid).child("Patient E-mail").setValue(memail);
+                mRef.child("Patient Info").child(mpid).child("Patient Name").setValue(mpname);
+                mRef.child("Patient Info").child(mpid).child("Patient Contact Number").setValue(mcnumber);
+                mRef.child("Patient Info").child(mpid).child("Patient I-D Card").setValue(mid);
                 checkbutton_bg();
-                mRef.child(mpid).child("Patient Blood Group").setValue(mBg);
+                mRef.child("Patient Info").child(mpid).child("Patient Blood Group").setValue(mBg);
                 checkbutton_btype();
-                mRef.child(mpid).child("Patient Blood Type").setValue(mBt);
+                mRef.child("Patient Info").child(mpid).child("Patient Blood Type").setValue(mBt);
                 checkbutton_gender();
-                mRef.child(mpid).child("Patient Gender").setValue(mGen);
-                mRef.child(mpid).child("Patient Date of Birth").setValue(mDobm);
+                mRef.child("Patient Info").child(mpid).child("Patient Gender").setValue(mGen);
+                mRef.child("Patient Info").child(mpid).child("Patient Date of Birth").setValue(mDobm);
                 Toast.makeText(PatientAddinfo.this, "The data has been pushed Successfully", Toast.LENGTH_SHORT).show();
                 Log.d("TAG", "onClick: RadioButton Selected :"+mBg);
                 Log.d("TAG", "onClick: RadioButton Selected :"+mBt);
