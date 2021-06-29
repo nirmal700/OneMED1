@@ -45,13 +45,14 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:orientation="horizontal">
+
         <Button
-            android:id="@+id/button9"
+            android:id="@+id/UpateDelete"
             android:layout_width="141dp"
             android:layout_height="80dp"
             android:layout_marginLeft="40dp"
             android:layout_marginTop="10dp"
-            android:text="Button" />
+            android:text="Update/Delete" />
 
         <Button
             android:id="@+id/button10"

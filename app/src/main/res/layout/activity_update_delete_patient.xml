@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="5dp"
+    tools:context=".PatientAddinfo">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="668dp"
+        android:layout_margin="20dp"
+        android:orientation="vertical"
+        tools:context=".AppointActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:text="Patient Id"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/patientid"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="130dp"
+            android:id="@+id/FetchUp"
+            android:text="Fetch"
+            android:textStyle="bold"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:text="Email :"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/emailid"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:text="Patient Name :"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <EditText
+
+                android:id="@+id/patientname"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:text="Blood Group :"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/bgid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/bga"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="A" />
+
+                <RadioButton
+                    android:id="@+id/bgb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="B" />
+
+                <RadioButton
+                    android:id="@+id/bgab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="AB" />
+
+                <RadioButton
+                    android:id="@+id/bgo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="O" />
+            </RadioGroup>
+            <!--        <EditText-->
+            <!--            android:textSize="20dp"-->
+            <!--            android:textStyle="bold"-->
+            <!--            android:layout_marginLeft="8dp"-->
+            <!--            android:layout_width="200dp"-->
+            <!--            android:layout_height="match_parent"-->
+            <!--            android:id="@+id/bgid"/>-->
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:text="Blood Type :"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/btid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/Positive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Positive" />
+
+                <RadioButton
+                    android:id="@+id/Negative"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="Negetive" />
+            </RadioGroup>
+            <!--        <EditText-->
+            <!--            android:textSize="20dp"-->
+            <!--            android:textStyle="bold"-->
+            <!--            android:layout_marginLeft="8dp"-->
+            <!--            android:layout_width="200dp"-->
+            <!--            android:layout_height="match_parent"-->
+            <!--            android:id="@+id/btid"/>-->
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:text="Gender :"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/genderid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Male" />
+
+                <RadioButton
+                    android:id="@+id/female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="Female" />
+            </RadioGroup>
+            <!--        <TextView-->
+            <!--            android:textSize="20dp"-->
+            <!--            android:textStyle="bold"-->
+            <!--            android:layout_width="150dp"-->
+            <!--            android:layout_height="match_parent"-->
+            <!--            android:text="Gender :"/>-->
+            <!--        <EditText-->
+            <!--            android:textSize="20dp"-->
+            <!--            android:textStyle="bold"-->
+            <!--            android:layout_marginLeft="8dp"-->
+            <!--            android:layout_width="200dp"-->
+            <!--            android:layout_height="match_parent"-->
+            <!--            android:id="@+id/genderid"/>-->
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:text="Contact Number :"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/contactid"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp">
+
+            <Button
+                android:id="@+id/dobbutton"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:text="Date of birth :"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/dobid"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:text="National ID Number :"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/nid"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp">
+            <!--        <EditText-->
+            <!--            android:layout_width="100dp"-->
+            <!--            android:layout_height="match_parent"-->
+            <!--           android:hint="ID Search"-->
+            <!--            android:textSize="20dp"-->
+            <!--            android:id="@+id/appointsearchtid"/>-->
+
+
+            <!--        <Button-->
+
+            <!--            android:layout_marginLeft="20sp"-->
+            <!--            android:layout_width="100dp"-->
+            <!--            android:layout_height="match_parent"-->
+            <!--            android:text="Search"-->
+            <!--            android:id="@+id/searchid"/>-->
+            <Button
+
+                android:id="@+id/update"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="50dp"
+                android:text="Update"
+                android:textStyle="bold" />
+            <Button
+
+                android:id="@+id/delete"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="70dp"
+                android:text="Delete"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
