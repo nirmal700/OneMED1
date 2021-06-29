@@ -12,8 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OneMED1">
-        <activity android:name=".PatientAddinfo"
+        <activity android:name=".View_Patient_Details"
             android:parentActivityName=".Homepage_activity"></activity>
+        <activity
+            android:name=".PatientAddinfo"
+            android:parentActivityName=".Homepage_activity" />
         <activity android:name=".Register" />
         <activity
             android:name=".Homepage_Patient"

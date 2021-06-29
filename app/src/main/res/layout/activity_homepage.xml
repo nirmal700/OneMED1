@@ -29,14 +29,15 @@
             android:layout_height="80dp"
             android:layout_marginLeft="40dp"
             android:layout_marginTop="10dp"
-            android:text="  Add Patient" />
+            android:text="Add Patient" />
+
         <Button
+            android:id="@+id/ViewPatient"
             android:layout_width="140dp"
             android:layout_height="80dp"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="10dp"
-            android:text="Button"
-            android:id="@+id/button8"/>
+            android:text="View Patient Details" />
     </LinearLayout>
 
     <LinearLayout
