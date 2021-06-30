@@ -58,22 +58,30 @@ public class View_Patient_Details extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             Map<String,Object> data = (Map<String, Object>)snapshot.getValue();
-                            String name = (String) data.get("Patient Name");
-                            String bgroup = (String) data.get("Patient Blood Group");
-                            String btype = (String) data.get("Patient Blood Type");
-                            String gender = (String) data.get("Patient Gender");
-                            String dob = (String) data.get("Patient Date of Birth");
-                            String cno = (String) data.get("Patient Contact Number");
-                            String mail = (String) data.get("Patient E-mail");
-                            String nid = (String) data.get("Patient I-D Card");
-                            mName.setText(name);
-                            mBgroup.setText(bgroup);
-                            mBtype.setText(btype);
-                            mGender.setText(gender);
-                            mDob.setText(dob);
-                            mCno.setText(cno);
-                            mEmail.setText(mail);
-                            mNid.setText(nid);
+                            if(data==null)
+                            {
+                                mPid.setError("Enter valid patient ID");
+                                return;
+                            }
+                            else
+                                {
+                                String name = (String) data.get("Patient Name");
+                                String bgroup = (String) data.get("Patient Blood Group");
+                                String btype = (String) data.get("Patient Blood Type");
+                                String gender = (String) data.get("Patient Gender");
+                                String dob = (String) data.get("Patient Date of Birth");
+                                String cno = (String) data.get("Patient Contact Number");
+                                String mail = (String) data.get("Patient E-mail");
+                                String nid = (String) data.get("Patient I-D Card");
+                                mName.setText(name);
+                                mBgroup.setText(bgroup);
+                                mBtype.setText(btype);
+                                mGender.setText(gender);
+                                mDob.setText(dob);
+                                mCno.setText(cno);
+                                mEmail.setText(mail);
+                                mNid.setText(nid);
+                                }
                         }
                         @Override
                         public void onCancelled(@NonNull @NotNull DatabaseError error) {
