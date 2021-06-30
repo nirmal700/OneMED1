@@ -21,11 +21,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.Calendar;
 
 public class PatientAddinfo extends AppCompatActivity {
-    EditText mPid,mEmail,mPname,mCnumber,mDob,mId;
-    Button mSave, mDobbutton;
-    RadioGroup mBgroup,mBtype,mGender;
-    RadioButton rButton;
-    String mBg="",mBt="",mGen="",mDobm="";
+    private EditText mPid,mEmail,mPname,mCnumber,mDob,mId;
+    private Button mSave, mDobbutton;
+    private RadioGroup mBgroup,mBtype,mGender;
+    private RadioButton rButton;
+    private String mBg="",mBt="",mGen="",mDobm="";
     int mDate,mMonth,mYear;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mRef;

@@ -56,7 +56,7 @@ public class View_Patient_Details extends AppCompatActivity {
                     mRef =mDatabase.getReference("Patient Info");
                     mRef.child(mpid).addValueEventListener(new ValueEventListener() {
                         @Override
-                        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
                             Map<String,Object> data = (Map<String, Object>)snapshot.getValue();
                             String name = (String) data.get("Patient Name");
                             String bgroup = (String) data.get("Patient Blood Group");
