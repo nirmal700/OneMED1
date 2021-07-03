@@ -208,6 +208,11 @@ public class Update_Delete_Patient extends AppCompatActivity {
                                     mCnumber.setError("Contact Number is Required.");
                                     return;
                                 }
+                                if(mcnumber.length()!=10)
+                                {
+                                    mCnumber.setError("The Contact No. Should be of 10 Digits");
+                                    return;
+                                }
                                 mDobm=mDob.getText().toString();
                                 if (TextUtils.isEmpty(mDobm)) {
                                     mDob.setError("Date of birth is Required.");
