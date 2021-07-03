@@ -90,6 +90,11 @@ public class PatientAddinfo extends AppCompatActivity {
                     mCnumber.setError("Contact Number is Required.");
                     return;
                 }
+                if(mcnumber.length()!=10)
+                {
+                    mCnumber.setError("The Contact no Should be of 10 Digits");
+                    return;
+                }
                 if (TextUtils.isEmpty(mDobm)) {
                     mDob.setError("Date of birth is Required.");
                     return;
