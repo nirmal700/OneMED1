@@ -12,8 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OneMED1">
-        <activity android:name=".Update_Delete_Patient"
-            android:parentActivityName=".Homepage_activity"></activity>
+        <activity android:name=".Add_Prescription_Organisation"></activity>
+        <activity
+            android:name=".Update_Delete_Patient"
+            android:parentActivityName=".Homepage_activity" />
         <activity
             android:name=".View_Patient_Details"
             android:parentActivityName=".Homepage_activity" />
