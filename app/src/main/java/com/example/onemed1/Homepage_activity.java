@@ -1,14 +1,10 @@
 package com.example.onemed1;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -23,10 +19,10 @@ public class Homepage_activity extends AppCompatActivity {
         setContentView(R.layout.activity_homepage);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         textView = findViewById(R.id.text_view_home_name);
-        mAddpatient=findViewById(R.id.addPatient);
-        mViewpatient=findViewById(R.id.ViewPatient);
-        mUpdelpatient=findViewById(R.id.UpdateDelete);
-        mPrescribeMed=findViewById(R.id.Prescribe_meds);
+        mAddpatient=findViewById(R.id.Button1);
+        mViewpatient=findViewById(R.id.Button2);
+        mUpdelpatient=findViewById(R.id.Button3);
+        mPrescribeMed=findViewById(R.id.Button4);
         Intent intent = getIntent();
         String name = intent.getStringExtra(MainActivity.USER_NAME);
         textView.setText("Hi! Mr.  " + name);

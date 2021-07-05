@@ -16,7 +16,7 @@ public class Homepage_Patient extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage_patient);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        textView = findViewById(R.id.textView7);
+        textView = findViewById(R.id.text_view_name);
         Intent intent = getIntent();
         String name = intent.getStringExtra(MainActivity.USER_NAME);
         textView.setText("Hi! Mr.  " + name);
