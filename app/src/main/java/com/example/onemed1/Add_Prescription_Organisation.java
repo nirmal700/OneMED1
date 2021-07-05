@@ -4,12 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -17,10 +19,23 @@ import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 
 public class Add_Prescription_Organisation extends AppCompatActivity {
     private Spinner spinnerNames;
@@ -33,11 +48,21 @@ public class Add_Prescription_Organisation extends AppCompatActivity {
     private TextView textViewDateStart;
     private TextView textViewDateEnd;
     private String authNumber;
+    private Button mSave;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_prescription_organisation);
+//        FirebaseFirestore.getInstance().collection("Doctor's")
+//                .document("Doctor's Info").get()
+//                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull @NotNull Task<DocumentSnapshot> task) {
+//                        DocumentSnapshot document = task.getResult();
+//                        List<String> group = (List<String>) document.get("Name");
+//                    }
+//                });
         spinnerNames = findViewById(R.id.spinner_doctors_list);
         String[] names = this.getResources().getStringArray(R.array.doctors_name);
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>
@@ -58,6 +83,7 @@ public class Add_Prescription_Organisation extends AppCompatActivity {
         textViewDateStart = findViewById(R.id.text_view_add_date_start);
         textViewDateEnd = findViewById(R.id.text_view_add_date_end);
         imageViewDateEnd=findViewById(R.id.image_view_date_end);
+        mSave=findViewById(R.id.Save);
         imageViewDateStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,6 +124,37 @@ public class Add_Prescription_Organisation extends AppCompatActivity {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
 
+            }
+        });
+        mSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ProgressDialog progressDialog = new ProgressDialog(Add_Prescription_Organisation.this);
+                progressDialog.setMessage("Loading...");
+                progressDialog.show();
+                progressDialog.setCancelable(false);
+                String doctorName = spinnerNames.getSelectedItem().toString();
+                String medicineName = editTextMedicineName.getText().toString().trim() + "";
+                boolean breakfast = checkBoxBreakfast.isChecked();
+                boolean lunch = checkBoxLunch.isChecked();
+                boolean dinner = checkBoxDinner.isChecked();
+                String dateStart = textViewDateStart.getText().toString() + "";
+                String dateEnd = textViewDateEnd.getText().toString() + "";
+                Prescription prescription = new Prescription(authNumber,doctorName,medicineName,breakfast,lunch,dinner,dateStart,dateEnd,10,"Nirmal");
+                CollectionReference collectionReference = FirebaseFirestore.getInstance().collection("Prescriptions");
+                collectionReference.add(prescription).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        progressDialog.cancel();
+                        Toast.makeText(Add_Prescription_Organisation.this,"Prescription Added",Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull @NotNull Exception e) {
+                        progressDialog.cancel();
+                        Toast.makeText(Add_Prescription_Organisation.this,"Prescription Failed"+e,Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }
