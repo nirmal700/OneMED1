@@ -1,10 +1,14 @@
 package com.example.onemed1;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -12,16 +16,17 @@ public class Homepage_activity extends AppCompatActivity {
     TextView textView;
     Button mAddpatient;
     Button mViewpatient;
-    Button mUpdelpatient;
+    Button mUpdelpatient,mPrescribeMed;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        textView = findViewById(R.id.textView8);
+        textView = findViewById(R.id.text_view_home_name);
         mAddpatient=findViewById(R.id.addPatient);
         mViewpatient=findViewById(R.id.ViewPatient);
-        mUpdelpatient=findViewById(R.id.UpateDelete);
+        mUpdelpatient=findViewById(R.id.UpdateDelete);
+        mPrescribeMed=findViewById(R.id.Prescribe_meds);
         Intent intent = getIntent();
         String name = intent.getStringExtra(MainActivity.USER_NAME);
         textView.setText("Hi! Mr.  " + name);
@@ -43,6 +48,13 @@ public class Homepage_activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Homepage_activity.this, Update_Delete_Patient.class);
+                startActivity(intent);
+            }
+        });
+        mPrescribeMed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Homepage_activity.this, Add_Prescription_Organisation.class);
                 startActivity(intent);
             }
         });

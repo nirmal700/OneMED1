@@ -1,114 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".Homepage_Patient">
-    <LinearLayout
+    android:background="#81D4FA">
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/image_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@mipmap/hospital_background" />
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="OneMED Organisation page"
-            android:textSize="30dp"
+            android:id="@+id/homet1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/image_home"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="70dp"
+            android:gravity="center_vertical"
+            android:text="Hello Doctor!"
+            android:textColor="@android:color/black"
+            android:textSize="32sp"
             android:textStyle="bold" />
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/text_view_home_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/homet1"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            android:text="Name"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/addPatient"
-            android:layout_width="140dp"
-            android:layout_height="80dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="10dp"
-            android:text="Add Patient" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/image_home"
+            android:layout_margin="8dp"
+            android:background="@drawable/custom_button_border"
+            android:drawableStart="@drawable/ic_approve"
+            android:gravity="center"
+            android:paddingStart="12dp"
+            android:paddingTop="25dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="25dp"
+            android:text="Add Patient"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="25sp" />
 
         <Button
             android:id="@+id/ViewPatient"
-            android:layout_width="140dp"
-            android:layout_height="80dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="10dp"
-            android:text="View Patient Details" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/UpateDelete"
-            android:layout_width="141dp"
-            android:layout_height="80dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="10dp"
-            android:text="Update/Delete" />
-
-        <Button
-            android:id="@+id/button10"
-            android:layout_width="140dp"
-            android:layout_height="80dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="10dp"
-            android:text="Button" />
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/button11"
-            android:layout_width="140dp"
-            android:layout_height="80dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="10dp"
-
-            android:text="BUtton" />
-        <Button
-            android:id="@+id/button12"
-            android:layout_width="140dp"
-            android:layout_height="80dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="10dp"
-            android:text="Button" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingTop="10dp">
-
-        <TextView
-            android:id="@+id/textView8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_below="@id/addPatient"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/custom_button_border"
+            android:drawableStart="@drawable/ic_pending"
+            android:gravity="center"
+            android:paddingStart="8dp"
+            android:paddingTop="25dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="25dp"
+            android:text="View Patient"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="25sp" />
 
-        <ImageView
-            android:layout_width="346dp"
-            android:layout_height="329dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="30dp"
-            android:cropToPadding="true"
-            android:src="@drawable/ic_organisation" />
 
-    </LinearLayout>
+        <Button
+            android:id="@+id/UpdateDelete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ViewPatient"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/custom_button_border"
+            android:drawableStart="@drawable/ic_check_appointment"
+            android:gravity="center"
+            android:paddingStart="8dp"
+            android:paddingTop="25dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="25dp"
+            android:text="Update / Delete Patient"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="25sp" />
 
+        <Button
+            android:id="@+id/Prescribe_meds"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/UpdateDelete"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/custom_button_border"
+            android:drawableStart="@drawable/ic_patient"
+            android:gravity="center"
+            android:paddingStart="12dp"
+            android:paddingTop="25dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="25dp"
+            android:text="Pescribe Meds"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="25sp" />
 
-</LinearLayout>
+    </RelativeLayout>
 
-
-
-
+</ScrollView>
