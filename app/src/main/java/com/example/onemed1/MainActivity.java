@@ -44,6 +44,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
 
+    public static String email;
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
     EditText mEmail,mPassword;
@@ -119,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = mEmail.getText().toString().trim();
+                email = mEmail.getText().toString().trim();
                 String password = mPassword.getText().toString().trim();
                 if (TextUtils.isEmpty(email)) {
                     mEmail.setError("Email is Required.");

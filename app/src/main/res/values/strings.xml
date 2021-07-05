@@ -11,7 +11,44 @@
         <item>Organisation</item>
         <item>Pharmacy</item>
         <item>Patient</item>
+    </string-array>
 
+    <string-array name="doctors_name">
+        <item>Dr Adiveppa Hosangadi</item>
+        <item>Dr Amruth</item>
+        <item>Dr Bharat Kshatri</item>
+        <item>Dr Bhushan Gramopadya</item>
+        <item>Dr Chandrashekar Kachapur</item>
+        <item>Dr Ishwar Hosmani</item>
+        <item>Dr Kasturi Donimath</item>
+        <item>Dr Kiran Kattimani</item>
+        <item>Dr Krishna Baradol</item>
+        <item>Dr Manjuprasad</item>
+        <item>Dr N M Didagur</item>
+        <item>Dr Raghav Bhosale</item>
+        <item>Dr Rajshankar Sankal</item>
+        <item>Dr Ramesh Timanaykar</item>
+        <item>Dr Ravi Khasnis</item>
+        <item>Dr Ravindra Elgar</item>
+        <item>Dr S P Baligar</item>
+        <item>Dr Sanjeev Kalsoor</item>
+        <item>Dr Sanjeev Kulgod</item>
+        <item>Dr Shankargouda Patil</item>
+        <item>Dr Sharankumar</item>
+        <item>Dr Sheetal Kulgod</item>
+        <item>Dr Shivanand Illalu</item>
+        <item>Dr Shrinivas H</item>
+        <item>Dr Somashekharappa Kadur</item>
+        <item>Dr Sudhindrashayana Fattepur</item>
+        <item>Dr Sunil Gayad</item>
+        <item>Dr Suresh Hucchannavar</item>
+        <item>Dr Ullas Bisleri</item>
+        <item>Dr Umesh Bilagi</item>
+        <item>Dr Venkatesh Muger</item>
+        <item>Dr Venkatesh Mulimani</item>
+        <item>Dr Vijaykrishna Kolur</item>
+        <item>Dr Vinod Ratageri</item>
+        <item>Dr Ravi S Nemagouda</item>
     </string-array>
 
     <string name="menu_home">Home</string>
@@ -26,4 +63,6 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
