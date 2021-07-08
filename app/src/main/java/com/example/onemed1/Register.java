@@ -87,22 +87,6 @@ public class Register extends AppCompatActivity {
                     mPhone.setError("Phone Must be Greater than 10");
                     return;
                 }
-                mRef.child(mpid).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                        mRef.child(mpid).child("Email").setValue(email);
-                        mRef.child(mpid).child("Phone").setValue(phone);
-                        mRef.child(mpid).child("Full Name").setValue(fullName);
-                        mRef.child(mpid).child("Patient ID").setValue(mpid);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
-                        mEmail.setError("Registration Failed");
-                        return;
-                    }
-                });
-
                 progressBar.setVisibility(View.VISIBLE);
                 mRef1=mDatabase.getReference("Patient Info");
                 mRef1.child(mpid).addValueEventListener(new ValueEventListener() {
@@ -114,6 +98,21 @@ public class Register extends AppCompatActivity {
                             progressBar.setVisibility(View.GONE);
                             return;
                         } else {
+                            mRef.child(mpid).addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                    mRef.child(mpid).child("Email").setValue(email);
+                                    mRef.child(mpid).child("Phone").setValue(phone);
+                                    mRef.child(mpid).child("FullName").setValue(fullName);
+                                    mRef.child(mpid).child("PatientID").setValue(mpid);
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+                                    mEmail.setError("Registration Failed");
+                                    return;
+                                }
+                            });
                             fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {

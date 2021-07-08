@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     FloatingActionButton fab;
     Spinner spinner;
     public static final String USER_NAME = "com.example.onemed1.username";
+    public static final String USER_MAIL = "com.example.onemed1.username.mail";
 
 
     @Override
@@ -168,7 +169,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 Toast.makeText(MainActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getApplicationContext(), Homepage_activity.class));
+                                Intent intent = new Intent(MainActivity.this, Homepage_Patient.class);
+                                intent.putExtra(USER_MAIL,email);
+                                startActivity(intent);
                                 progressBar.setVisibility(View.GONE);
                             } else {
                                 Toast.makeText(MainActivity.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -203,6 +206,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         Toast.makeText(MainActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(MainActivity.this, Homepage_Pharmacy.class);
                         intent.putExtra(USER_NAME, oNm);
+                        intent.putExtra(USER_MAIL,em);
                         startActivity(intent);
                     }
                     else
@@ -239,6 +243,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         Toast.makeText(MainActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(MainActivity.this, Homepage_activity.class);
                         intent.putExtra(USER_NAME, oNm);
+                        intent.putExtra(USER_MAIL,em);
                         startActivity(intent);
                     }
                     else

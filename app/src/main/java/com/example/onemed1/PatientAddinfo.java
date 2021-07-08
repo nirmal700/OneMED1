@@ -111,8 +111,8 @@ public class PatientAddinfo extends AppCompatActivity {
                     mId.setError("Patient I-D is Required.");
                     return;
                 }
-                mRef =mDatabase.getReference("Patient Info");
-                mRef.child(mpid).addValueEventListener(new ValueEventListener() {
+                mRef =mDatabase.getReference();
+                mRef.child("Patient Info").child(mpid).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         Map<String,Object> data = (Map<String, Object>)snapshot.getValue();
