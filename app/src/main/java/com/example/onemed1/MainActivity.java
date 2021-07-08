@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     TextView mCreateBtn;
     ProgressBar progressBar;
     FirebaseAuth fAuth;
-    String oEm="",oPs="";
+    String oEm="",oPs="",oNm="";
     public String snip;
     public int sn = 0;
     FloatingActionButton fab;
@@ -231,10 +231,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 Map<String, Object> data = (Map<String, Object>) snapshot.getValue();
                 oEm = snapshot.child("oid").getValue(String.class);
                 oPs = snapshot.child("password").getValue(String.class);
+                oNm = snapshot.child("Name").getValue(String.class);
                 if (oEm != null && oPs != null) {
                     if (oEm.equals(em) && oPs.equals(ps)) {
                         Toast.makeText(MainActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(MainActivity.this, Homepage_activity.class);
+                        intent.putExtra(USER_NAME, oNm);
                         startActivity(intent);
                     }
                     else
