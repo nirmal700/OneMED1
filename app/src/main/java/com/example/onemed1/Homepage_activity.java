@@ -25,7 +25,7 @@ public class Homepage_activity extends AppCompatActivity {
         mPrescribeMed=findViewById(R.id.Button4);
         Intent intent = getIntent();
         String name = intent.getStringExtra(MainActivity.USER_NAME);
-        textView.setText("Hi! Mr.  " + name);
+        textView.setText("Hi! Dr.  " + name);
         mAddpatient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
