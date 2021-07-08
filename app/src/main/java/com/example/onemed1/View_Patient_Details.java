@@ -73,14 +73,14 @@ public class View_Patient_Details extends AppCompatActivity {
                                 String cno = (String) data.get("Patient Contact Number");
                                 String mail = (String) data.get("Patient E-mail");
                                 String nid = (String) data.get("Patient I-D Card");
-                                mName.setText(name);
-                                mBgroup.setText(bgroup);
-                                mBtype.setText(btype);
-                                mGender.setText(gender);
-                                mDob.setText(dob);
-                                mCno.setText(cno);
-                                mEmail.setText(mail);
-                                mNid.setText(nid);
+                                mName.setText("Name : "+name);
+                                mBgroup.setText("Blood Group :"+bgroup);
+                                mBtype.setText("Blood Type :"+btype);
+                                mGender.setText("Gender :"+gender);
+                                mDob.setText("Date Of Birth :"+dob);
+                                mCno.setText("Contact No. :"+cno);
+                                mEmail.setText("E-mail ID :"+mail);
+                                mNid.setText("National ID :"+nid);
                                 }
                         }
                         @Override
