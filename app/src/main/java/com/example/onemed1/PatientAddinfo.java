@@ -1,5 +1,6 @@
 package com.example.onemed1;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
@@ -15,10 +16,16 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Calendar;
+import java.util.Map;
 
 public class PatientAddinfo extends AppCompatActivity {
     private EditText mPid,mEmail,mPname,mCnumber,mDob,mId;
@@ -104,27 +111,43 @@ public class PatientAddinfo extends AppCompatActivity {
                     mId.setError("Patient I-D is Required.");
                     return;
                 }
-                mRef.child("Patient Info").child(mpid).child("Patient ID").setValue(mpid);
-                mRef.child("Patient Info").child(mpid).child("Patient E-mail").setValue(memail);
-                mRef.child("Patient Info").child(mpid).child("Patient Name").setValue(mpname);
-                mRef.child("Patient Info").child(mpid).child("Patient Contact Number").setValue(mcnumber);
-                mRef.child("Patient Info").child(mpid).child("Patient I-D Card").setValue(mid);
-                checkbutton_bg();
-                mRef.child("Patient Info").child(mpid).child("Patient Blood Group").setValue(mBg);
-                checkbutton_btype();
-                mRef.child("Patient Info").child(mpid).child("Patient Blood Type").setValue(mBt);
-                checkbutton_gender();
-                mRef.child("Patient Info").child(mpid).child("Patient Gender").setValue(mGen);
-                mRef.child("Patient Info").child(mpid).child("Patient Date of Birth").setValue(mDobm);
-                Toast.makeText(PatientAddinfo.this, "The data has been pushed Successfully", Toast.LENGTH_SHORT).show();
-                Log.d("TAG", "onClick: RadioButton Selected :"+mBg);
-                Log.d("TAG", "onClick: RadioButton Selected :"+mBt);
-                Intent intent = new Intent(PatientAddinfo.this, Homepage_activity.class);
-                startActivity(intent);
+                mRef =mDatabase.getReference("Patient Info");
+                mRef.child(mpid).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Map<String,Object> data = (Map<String, Object>)snapshot.getValue();
+                        if(data==null) {
+                            mRef.child("Patient Info").child(mpid).child("Patient ID").setValue(mpid);
+                            mRef.child("Patient Info").child(mpid).child("Patient E-mail").setValue(memail);
+                            mRef.child("Patient Info").child(mpid).child("Patient Name").setValue(mpname);
+                            mRef.child("Patient Info").child(mpid).child("Patient Contact Number").setValue(mcnumber);
+                            mRef.child("Patient Info").child(mpid).child("Patient I-D Card").setValue(mid);
+                            checkbutton_bg();
+                            mRef.child("Patient Info").child(mpid).child("Patient Blood Group").setValue(mBg);
+                            checkbutton_btype();
+                            mRef.child("Patient Info").child(mpid).child("Patient Blood Type").setValue(mBt);
+                            checkbutton_gender();
+                            mRef.child("Patient Info").child(mpid).child("Patient Gender").setValue(mGen);
+                            mRef.child("Patient Info").child(mpid).child("Patient Date of Birth").setValue(mDobm);
+                            Toast.makeText(PatientAddinfo.this, "The data has been pushed Successfully", Toast.LENGTH_SHORT).show();
+                            Log.d("TAG", "onClick: RadioButton Selected :" + mBg);
+                            Log.d("TAG", "onClick: RadioButton Selected :" + mBt);
+                            Intent intent = new Intent(PatientAddinfo.this, Homepage_activity.class);
+                            startActivity(intent);
+                        }
+                        else {
+                            mPid.setError("Enter valid patient ID");
+                            return;
+                        }
+                    }
 
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+                        mPid.setError("Enter Valid Patient ID");
+                        return;
+                    }
+                });
             }
-        });
-    }
     public void checkbutton_bg(){
         int radioid = mBgroup.getCheckedRadioButtonId();
         rButton=findViewById(radioid);
@@ -142,5 +165,8 @@ public class PatientAddinfo extends AppCompatActivity {
         rButton=findViewById(radioid);
         mGen=rButton.getText().toString();
         //Toast.makeText(this, "Selected Radio Button"+mGen, Toast.LENGTH_SHORT).show();
+        }
+        });
+
     }
 }
