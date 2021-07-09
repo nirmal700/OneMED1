@@ -47,7 +47,7 @@ public class Homepage_Patient extends AppCompatActivity {
                         {
                            mPid = Pid;
                            mName=Name;
-                            textView.setText("Hi! Mr.  " +mName + "P ID:" + Pid);
+                            textView.setText("Hi! Mr.  " +mName+  "\nPatient ID:" + Pid);
                        }
                     }
                 }
