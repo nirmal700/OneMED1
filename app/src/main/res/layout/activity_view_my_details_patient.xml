@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp">
+
+
+        <TextView
+            android:id="@+id/doctor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Your Details Are"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/PatientName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/doctor"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/custom_button_border"
+            android:text="Name:"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:padding="12dp" />
+        <TextView
+            android:id="@+id/PatientCno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/PatientName"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/custom_button_border"
+            android:text="Contact No:"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:padding="12dp" />
+        <TextView
+            android:id="@+id/PatientEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/PatientCno"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/custom_button_border"
+            android:text="Email ID:"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:padding="12dp" />
+
+        <RelativeLayout
+            android:id="@+id/rel1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/PatientEmail"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/custom_button_border"
+            android:paddingBottom="16dp">
+
+            <TextView
+                android:id="@+id/text_view_medicine_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:text="Details"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/PatientBgroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text_view_medicine_time"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/custom_button_border"
+                android:text="Blood Group:"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:padding="12dp" />
+            <TextView
+                android:id="@+id/PatientBtype"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/PatientBgroup"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/custom_button_border"
+                android:text="Blood Type:"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:padding="12dp" />
+            <TextView
+                android:id="@+id/PatientGen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/PatientBtype"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/custom_button_border"
+                android:text="Gender:"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:padding="12dp" />
+            <TextView
+                android:id="@+id/PaitientDob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/PatientGen"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/custom_button_border"
+                android:text="Date Of Birth:"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:padding="12dp" />
+            <TextView
+                android:id="@+id/PatientnationalId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/PaitientDob"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/custom_button_border"
+                android:text="National ID:"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:padding="12dp" />
+
+
+        </RelativeLayout>
+
+
+        <!--        <RelativeLayout-->
+        <!--            android:id="@+id/rel2"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_below="@id/rel1"-->
+        <!--            android:layout_marginTop="16dp"-->
+        <!--            android:background="@drawable/custom_button_border">-->
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/text_view_medicine_duration"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_centerVertical="true"-->
+        <!--                android:layout_margin="16dp"-->
+        <!--                android:text="Medicine Duration : "-->
+        <!--                android:textSize="18sp"-->
+        <!--                android:textStyle="bold" />-->
+
+        <!--            <NumberPicker-->
+        <!--                android:id="@+id/number_picker_duration"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="80dp"-->
+        <!--                android:layout_marginStart="8dp"-->
+        <!--                android:layout_toEndOf="@+id/text_view_medicine_duration" />-->
+
+        <!--            <TextView-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_centerVertical="true"-->
+        <!--                android:layout_marginStart="8dp"-->
+        <!--                android:layout_toEndOf="@id/number_picker_duration"-->
+        <!--                android:text="Days"-->
+        <!--                android:textSize="18sp"-->
+        <!--                android:textStyle="bold" />-->
+
+        <!--        </RelativeLayout>-->
+
+        <!--        <RelativeLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_below="@+id/rel2"-->
+        <!--            android:layout_marginTop="16dp"-->
+        <!--            android:background="@drawable/custom_button_border"-->
+        <!--            android:padding="16dp">-->
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/date_start"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:text="Select Date Start :"-->
+        <!--                android:textSize="18sp"-->
+        <!--                android:textStyle="bold" />-->
+
+        <!--            <ImageView-->
+        <!--                android:id="@+id/image_view_date_start"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginStart="10dp"-->
+        <!--                android:layout_toEndOf="@id/date_start"-->
+        <!--                android:src="@drawable/ic_calendar2" />-->
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/text_view_add_date_start"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginStart="10dp"-->
+        <!--                android:layout_toEndOf="@id/image_view_date_start"-->
+        <!--                android:textColor="@android:color/black"-->
+        <!--                android:textSize="18sp"-->
+        <!--                android:textStyle="bold" />-->
+
+        <!--            <TextView-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_below="@id/date_start"-->
+        <!--                android:text="Date End :"-->
+        <!--                android:textSize="18sp"-->
+        <!--                android:textStyle="bold"-->
+        <!--                android:layout_marginTop="16dp"/>-->
+
+        <!--            <TextView-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_below="@id/date_start"-->
+        <!--                android:layout_toEndOf="@id/date_start"-->
+        <!--                android:text=""-->
+        <!--                android:layout_marginTop="16dp"-->
+        <!--                android:textStyle="bold"-->
+        <!--                android:textColor="@android:color/black"-->
+        <!--                android:layout_marginStart="-50dp"-->
+        <!--                android:textSize="18sp"-->
+        <!--                android:id="@+id/text_view_add_date_end"/>-->
+        <!--            <ImageView-->
+        <!--                android:id="@+id/image_view_date_end"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginStart="190dp"-->
+        <!--                android:layout_below="@id/image_view_date_start"-->
+        <!--                android:src="@drawable/ic_calendar2" />-->
+
+        <!--            <Button-->
+        <!--                android:id="@+id/Save"-->
+        <!--                android:layout_width="125dp"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_alignParentStart="true"-->
+        <!--                android:layout_alignParentEnd="true"-->
+        <!--                android:layout_marginStart="16dp"-->
+        <!--                android:layout_marginTop="75dp"-->
+        <!--                android:layout_marginEnd="238dp"-->
+        <!--                android:text="Save" />-->
+        <!--        </RelativeLayout>-->
+    </RelativeLayout>-->
+
+</ScrollView>

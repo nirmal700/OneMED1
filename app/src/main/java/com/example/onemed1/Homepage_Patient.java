@@ -22,9 +22,11 @@ import java.util.Map;
 
 public class Homepage_Patient extends AppCompatActivity {
     TextView textView;
+    Button mViewmydetails;
     String Name="",Pid="",mPid="",mName="";
     private FirebaseDatabase mDatabase;
     private DatabaseReference mRef;
+    public static final String USER_PATIENT = "com.example.onemed1.username.pid";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +35,7 @@ public class Homepage_Patient extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance();
         mRef = mDatabase.getReference("Login Info");
         textView = findViewById(R.id.text_view_name);
+        mViewmydetails = findViewById(R.id.ViewMyDetails);
         Intent intent = getIntent();
         String email = intent.getStringExtra(MainActivity.USER_MAIL);
         mRef.orderByChild("Email").equalTo(email).addValueEventListener(new ValueEventListener() {
@@ -48,6 +51,14 @@ public class Homepage_Patient extends AppCompatActivity {
                            mPid = Pid;
                            mName=Name;
                             textView.setText("Hi! Mr.  " +mName+  "\nPatient ID:" + Pid);
+                            mViewmydetails.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(Homepage_Patient.this, ViewMyDetailsPatient.class);
+                                    intent.putExtra(USER_PATIENT,Pid);
+                                    startActivity(intent);
+                                }
+                            });
                        }
                     }
                 }
