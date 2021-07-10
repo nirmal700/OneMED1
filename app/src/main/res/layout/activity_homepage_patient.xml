@@ -62,7 +62,7 @@
             android:textSize="25sp" />
 
         <Button
-            android:id="@+id/Button2"
+            android:id="@+id/ViewMyMeds"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/ViewMyDetails"
@@ -76,7 +76,7 @@
             android:paddingTop="25dp"
             android:paddingEnd="12dp"
             android:paddingBottom="25dp"
-            android:text="Button 2"
+            android:text="View My Meds"
             android:textAllCaps="false"
             android:textColor="@android:color/black"
             android:textSize="25sp" />
@@ -86,7 +86,7 @@
             android:id="@+id/Button3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/Button2"
+            android:layout_below="@id/ViewMyMeds"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"

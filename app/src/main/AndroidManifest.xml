@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OneMED1">
-        <activity android:name=".Prescription_Recycler"></activity>
+        <activity android:name=".Prescription_Patient_Recycler"></activity>
+        <activity android:name=".Prescription_Recycler" />
         <activity android:name=".ViewMyDetailsPatient" />
         <activity android:name=".Add_Prescription_Organisation" />
         <activity

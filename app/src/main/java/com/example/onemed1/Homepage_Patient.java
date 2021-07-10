@@ -22,7 +22,7 @@ import java.util.Map;
 
 public class Homepage_Patient extends AppCompatActivity {
     TextView textView;
-    Button mViewmydetails;
+    Button mViewmydetails,mViewMyMeds;
     String Name="",Pid="",mPid="",mName="";
     private FirebaseDatabase mDatabase;
     private DatabaseReference mRef;
@@ -35,6 +35,7 @@ public class Homepage_Patient extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance();
         mRef = mDatabase.getReference("Login Info");
         textView = findViewById(R.id.text_view_name);
+        mViewMyMeds=findViewById(R.id.ViewMyMeds);
         mViewmydetails = findViewById(R.id.ViewMyDetails);
         Intent intent = getIntent();
         String email = intent.getStringExtra(MainActivity.USER_MAIL);
@@ -65,6 +66,14 @@ public class Homepage_Patient extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
+            }
+        });
+        mViewMyMeds.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Homepage_Patient.this, Prescription_Patient_Recycler.class);
+                intent.putExtra(USER_PATIENT,Pid);
+                startActivity(intent);
             }
         });
 

@@ -56,7 +56,7 @@
         android:gravity="center"
         android:padding="11dp"
         android:text="fetch"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintBottom_toTopOf="@+id/RecyclerView"
         app:layout_constraintStart_toStartOf="@+id/editTextPatientId"
         app:layout_constraintTop_toBottomOf="@+id/editTextPatientId" />
 
