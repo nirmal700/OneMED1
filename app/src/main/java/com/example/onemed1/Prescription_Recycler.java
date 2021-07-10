@@ -55,6 +55,7 @@ public class Prescription_Recycler extends AppCompatActivity {
                 {
                     mPid.setError("Patient ID cant be empty");
                 }
+                mDatalist.clear();
                 Query query = collectionReference.whereEqualTo("id",mPatientid);
                 query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
