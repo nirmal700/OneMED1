@@ -2,6 +2,7 @@ package com.example.onemed1;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -91,6 +92,18 @@ public class Prescription_Recycler extends AppCompatActivity {
                         }
                     }
                 });
+                new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT) {
+                    @Override
+                    public boolean onMove(@NonNull @NotNull RecyclerView recyclerView, @NonNull @NotNull RecyclerView.ViewHolder viewHolder, @NonNull @NotNull RecyclerView.ViewHolder target) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onSwiped(@NonNull @NotNull RecyclerView.ViewHolder viewHolder, int direction) {
+                        mDatalist.remove(viewHolder.getAdapterPosition());
+                        mPrescriptionAdapter.notifyDataSetChanged();
+                    }
+                }).attachToRecyclerView(mRecyclerView);
             }
         });
     }
