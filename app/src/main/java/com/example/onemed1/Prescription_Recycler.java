@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -72,6 +74,20 @@ public class Prescription_Recycler extends AppCompatActivity {
                         else
                         {
                             mPid.setError("Patient Has not been Prescribed Yet");
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull @NotNull Exception e) {
+                        mPid.setError(""+e);
+                    }
+                });
+                query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        if(queryDocumentSnapshots==null)
+                        {
+                            mPid.setError("Invaid ID");
                         }
                     }
                 });

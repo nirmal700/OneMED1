@@ -207,6 +207,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         Intent intent = new Intent(MainActivity.this, Homepage_Pharmacy.class);
                         intent.putExtra(USER_NAME, oNm);
                         intent.putExtra(USER_MAIL,em);
+                        progressBar.setVisibility(View.GONE);
                         startActivity(intent);
                     }
                     else
@@ -244,6 +245,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         Intent intent = new Intent(MainActivity.this, Homepage_activity.class);
                         intent.putExtra(USER_NAME, oNm);
                         intent.putExtra(USER_MAIL,em);
+                        progressBar.setVisibility(View.GONE);
                         startActivity(intent);
                     }
                     else
