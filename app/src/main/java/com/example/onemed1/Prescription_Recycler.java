@@ -7,7 +7,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -25,6 +29,9 @@ import java.util.List;
 public class Prescription_Recycler extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private ProgressDialog progressDialog;
+    private EditText mPid;
+    private String mPatientid;
+    private Button mFetch;
     private CollectionReference collectionReference;
     private PrescriptionAdapter mPrescriptionAdapter;
     private List<Prescription> mDatalist;
@@ -34,23 +41,39 @@ public class Prescription_Recycler extends AppCompatActivity {
         setContentView(R.layout.activity_prescription_recycler);
         mDatalist = new ArrayList<>();
         mRecyclerView = findViewById(R.id.RecyclerView);
+        mPid=findViewById(R.id.editTextPatientId);
+        mFetch=findViewById(R.id.Fetch);
         collectionReference = FirebaseFirestore.getInstance().collection("Prescriptions");
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mPrescriptionAdapter = new PrescriptionAdapter(this,mDatalist);
         mRecyclerView.setAdapter(mPrescriptionAdapter);
-        Query query = collectionReference.whereEqualTo("id","1001");
-        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        mFetch.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful())
+            public void onClick(View v) {
+                mPatientid=mPid.getText().toString();
+                if(TextUtils.isEmpty(mPatientid))
                 {
-                    for(QueryDocumentSnapshot prescribed : task.getResult())
-                    {
-                        Prescription prescription  = prescribed.toObject(Prescription.class);
-                        mDatalist.add(prescription);
-                    }
-                    mPrescriptionAdapter.notifyDataSetChanged();
+                    mPid.setError("Patient ID cant be empty");
                 }
+                Query query = collectionReference.whereEqualTo("id",mPatientid);
+                query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful())
+                        {
+                            for(QueryDocumentSnapshot prescribed : task.getResult())
+                            {
+                                Prescription prescription  = prescribed.toObject(Prescription.class);
+                                mDatalist.add(prescription);
+                            }
+                            mPrescriptionAdapter.notifyDataSetChanged();
+                        }
+                        else
+                        {
+                            mPid.setError("Patient Has not been Prescribed Yet");
+                        }
+                    }
+                });
             }
         });
     }

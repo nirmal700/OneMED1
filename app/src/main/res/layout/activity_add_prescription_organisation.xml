@@ -9,7 +9,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="8dp">
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Enter Patient ID:"
+            android:textSize="28sp" />
 
+
+        <EditText
+            android:id="@+id/editTextPatientId"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/text"
+            android:layout_marginTop="1dp"
+            android:ems="12"
+            android:hint="Patient ID"
+            android:inputType="phone"
+            android:paddingStart="8dp"
+            android:popupBackground="@color/light_blue" />
 
         <TextView
             android:id="@+id/doctor"
@@ -17,6 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_below="@id/editTextPatientId"
             android:text="Select Doctor"
             android:textSize="18sp" />
 

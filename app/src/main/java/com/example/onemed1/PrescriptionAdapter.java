@@ -50,6 +50,7 @@ public class PrescriptionAdapter extends RecyclerView.Adapter<PrescriptionAdapte
 
         holder.textViewDateStart.setText(prescription.getDateStart());
         holder.textViewDateEnd.setText(prescription.getDateEnd());
+        holder.textViewPatientName.setText(prescription.getPatientName());
     }
 
     @Override

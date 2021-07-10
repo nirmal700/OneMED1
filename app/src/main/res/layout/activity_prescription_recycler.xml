@@ -1,19 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ConstrainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Prescription_Recycler">
+    android:padding="8dp">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/RecyclerView"
+
+    <TextView
+        android:id="@+id/doctor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="23dp"
+        android:text="Enter Patient ID:"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextPatientId"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.076"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextPatientId"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/doctor"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="32dp"
+        android:ems="12"
+        android:hint="Enter Patient ID"
+        android:inputType="phone"
+        android:paddingStart="8dp"
+        android:popupBackground="@color/light_blue"
+        app:layout_constraintBottom_toTopOf="@+id/Fetch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/doctor" />
+
+    <Button
+        android:id="@+id/Fetch"
+        android:layout_width="108dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextPatientId"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="132dp"
+
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/custom_button_border_2"
+        android:gravity="center"
+        android:padding="11dp"
+        android:text="fetch"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintStart_toStartOf="@+id/editTextPatientId"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPatientId" />
+
+    <androidx.recyclerview.widget.RecyclerView
+
+        android:id="@+id/RecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.937"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Fetch" />
+
+
+    <!--        <RelativeLayout-->
+    <!--            android:id="@+id/rel2"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_below="@id/rel1"-->
+    <!--            android:layout_marginTop="16dp"-->
+    <!--            android:background="@drawable/custom_button_border">-->
+
+    <!--            <TextView-->
+    <!--                android:id="@+id/text_view_medicine_duration"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_centerVertical="true"-->
+    <!--                android:layout_margin="16dp"-->
+    <!--                android:text="Medicine Duration : "-->
+    <!--                android:textSize="18sp"-->
+    <!--                android:textStyle="bold" />-->
+
+    <!--            <NumberPicker-->
+    <!--                android:id="@+id/number_picker_duration"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="80dp"-->
+    <!--                android:layout_marginStart="8dp"-->
+    <!--                android:layout_toEndOf="@+id/text_view_medicine_duration" />-->
+
+    <!--            <TextView-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_centerVertical="true"-->
+    <!--                android:layout_marginStart="8dp"-->
+    <!--                android:layout_toEndOf="@id/number_picker_duration"-->
+    <!--                android:text="Days"-->
+    <!--                android:textSize="18sp"-->
+    <!--                android:textStyle="bold" />-->
+
+    <!--        </RelativeLayout>-->
+
+    <!--        <RelativeLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_below="@+id/rel2"-->
+    <!--            android:layout_marginTop="16dp"-->
+    <!--            android:background="@drawable/custom_button_border"-->
+    <!--            android:padding="16dp">-->
+
+    <!--            <TextView-->
+    <!--                android:id="@+id/date_start"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:text="Select Date Start :"-->
+    <!--                android:textSize="18sp"-->
+    <!--                android:textStyle="bold" />-->
+
+    <!--            <ImageView-->
+    <!--                android:id="@+id/image_view_date_start"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginStart="10dp"-->
+    <!--                android:layout_toEndOf="@id/date_start"-->
+    <!--                android:src="@drawable/ic_calendar2" />-->
+
+    <!--            <TextView-->
+    <!--                android:id="@+id/text_view_add_date_start"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginStart="10dp"-->
+    <!--                android:layout_toEndOf="@id/image_view_date_start"-->
+    <!--                android:textColor="@android:color/black"-->
+    <!--                android:textSize="18sp"-->
+    <!--                android:textStyle="bold" />-->
+
+    <!--            <TextView-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_below="@id/date_start"-->
+    <!--                android:text="Date End :"-->
+    <!--                android:textSize="18sp"-->
+    <!--                android:textStyle="bold"-->
+    <!--                android:layout_marginTop="16dp"/>-->
+
+    <!--            <TextView-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_below="@id/date_start"-->
+    <!--                android:layout_toEndOf="@id/date_start"-->
+    <!--                android:text=""-->
+    <!--                android:layout_marginTop="16dp"-->
+    <!--                android:textStyle="bold"-->
+    <!--                android:textColor="@android:color/black"-->
+    <!--                android:layout_marginStart="-50dp"-->
+    <!--                android:textSize="18sp"-->
+    <!--                android:id="@+id/text_view_add_date_end"/>-->
+    <!--            <ImageView-->
+    <!--                android:id="@+id/image_view_date_end"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginStart="190dp"-->
+    <!--                android:layout_below="@id/image_view_date_start"-->
+    <!--                android:src="@drawable/ic_calendar2" />-->
+
+    <!--            <Button-->
+    <!--                android:id="@+id/Save"-->
+    <!--                android:layout_width="125dp"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_alignParentStart="true"-->
+    <!--                android:layout_alignParentEnd="true"-->
+    <!--                android:layout_marginStart="16dp"-->
+    <!--                android:layout_marginTop="75dp"-->
+    <!--                android:layout_marginEnd="238dp"-->
+    <!--                android:text="Save" />-->
+    <!--        </RelativeLayout>-->
 </androidx.constraintlayout.widget.ConstraintLayout>
+

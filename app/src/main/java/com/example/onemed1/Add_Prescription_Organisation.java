@@ -25,6 +25,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -36,11 +41,12 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 public class Add_Prescription_Organisation extends AppCompatActivity {
     private Spinner spinnerNames;
     private NumberPicker numberPickerDuration;
-    private EditText editTextMedicineName;
+    private EditText editTextMedicineName,mEditPatientId;
     private CheckBox checkBoxBreakfast;
     private CheckBox checkBoxLunch;
     private CheckBox checkBoxDinner;
@@ -49,6 +55,8 @@ public class Add_Prescription_Organisation extends AppCompatActivity {
     private TextView textViewDateEnd;
     private String authNumber;
     private Button mSave;
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +91,7 @@ public class Add_Prescription_Organisation extends AppCompatActivity {
         textViewDateStart = findViewById(R.id.text_view_add_date_start);
         textViewDateEnd = findViewById(R.id.text_view_add_date_end);
         imageViewDateEnd=findViewById(R.id.image_view_date_end);
+        mEditPatientId=findViewById(R.id.editTextPatientId);
         mSave=findViewById(R.id.Save);
         imageViewDateStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,24 +144,44 @@ public class Add_Prescription_Organisation extends AppCompatActivity {
                 progressDialog.setCancelable(false);
                 String doctorName = spinnerNames.getSelectedItem().toString();
                 String medicineName = editTextMedicineName.getText().toString().trim() + "";
+                String mPid = mEditPatientId.getText().toString();
                 boolean breakfast = checkBoxBreakfast.isChecked();
                 boolean lunch = checkBoxLunch.isChecked();
                 boolean dinner = checkBoxDinner.isChecked();
                 String dateStart = textViewDateStart.getText().toString() + "";
                 String dateEnd = textViewDateEnd.getText().toString() + "";
-                Prescription prescription = new Prescription(authNumber,doctorName,medicineName,breakfast,lunch,dinner,dateStart,dateEnd,10,"Nirmal");
-                CollectionReference collectionReference = FirebaseFirestore.getInstance().collection("Prescriptions");
-                collectionReference.add(prescription).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                mDatabase=FirebaseDatabase.getInstance();
+                mRef =mDatabase.getReference("Patient Info");
+                mRef.child(mPid).addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        progressDialog.cancel();
-                        Toast.makeText(Add_Prescription_Organisation.this,"Prescription Added",Toast.LENGTH_SHORT).show();
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Map<String, Object> data = (Map<String, Object>) snapshot.getValue();
+                        if (data == null) {
+                            mEditPatientId.setError("Enter valid patient ID");
+                            return;
+                        } else {
+                            String name = (String) data.get("Patient Name");
+                            Prescription prescription = new Prescription(mPid, doctorName, medicineName, breakfast, lunch, dinner, dateStart, dateEnd, 10, name);
+                            CollectionReference collectionReference = FirebaseFirestore.getInstance().collection("Prescriptions");
+                            collectionReference.add(prescription).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                @Override
+                                public void onSuccess(DocumentReference documentReference) {
+                                    progressDialog.cancel();
+                                    Toast.makeText(Add_Prescription_Organisation.this, "Prescription Added", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull @NotNull Exception e) {
+                                    progressDialog.cancel();
+                                    Toast.makeText(Add_Prescription_Organisation.this, "Prescription Failed" + e, Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
                     }
-                }).addOnFailureListener(new OnFailureListener() {
                     @Override
-                    public void onFailure(@NonNull @NotNull Exception e) {
-                        progressDialog.cancel();
-                        Toast.makeText(Add_Prescription_Organisation.this,"Prescription Failed"+e,Toast.LENGTH_SHORT).show();
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+                        mEditPatientId.setError("Enter Valid Patient ID");
+                        return;
                     }
                 });
             }
