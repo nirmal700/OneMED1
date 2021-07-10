@@ -15,7 +15,7 @@ public class Homepage_activity extends AppCompatActivity {
     TextView textView;
     Button mAddpatient;
     Button mViewpatient;
-    Button mUpdelpatient,mPrescribeMed;
+    Button mUpdelpatient,mPrescribeMed,mViewmeds;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mRef;
     @Override
@@ -30,6 +30,7 @@ public class Homepage_activity extends AppCompatActivity {
         mViewpatient=findViewById(R.id.Button2);
         mUpdelpatient=findViewById(R.id.Button3);
         mPrescribeMed=findViewById(R.id.Button4);
+        mViewmeds=findViewById(R.id.Button5);
         Intent intent = getIntent();
         String name = intent.getStringExtra(MainActivity.USER_NAME);
 //        String mail= intent.getStringExtra(MainActivity.USER_MAIL);
@@ -75,6 +76,13 @@ public class Homepage_activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Homepage_activity.this, Add_Prescription_Organisation.class);
+                startActivity(intent);
+            }
+        });
+        mViewmeds.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Homepage_activity.this, Prescription_Recycler.class);
                 startActivity(intent);
             }
         });

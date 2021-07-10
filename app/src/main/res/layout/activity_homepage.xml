@@ -118,6 +118,25 @@
             android:textAllCaps="false"
             android:textColor="@android:color/black"
             android:textSize="25sp" />
+        <Button
+            android:id="@+id/Button5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Button4"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/custom_button_border"
+            android:drawableStart="@drawable/ic_patient"
+            android:gravity="center"
+            android:paddingStart="12dp"
+            android:paddingTop="25dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="25dp"
+            android:text="View Pescribed Meds"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="25sp" />
 
     </RelativeLayout>
 
