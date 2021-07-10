@@ -118,7 +118,7 @@ public class Register extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
                                         Toast.makeText(Register.this, "User Created!!", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(getApplicationContext(), Homepage_activity.class));
+                                        startActivity(new Intent(getApplicationContext(), Homepage_Patient.class));
                                     } else {
                                         Toast.makeText(Register.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                         progressBar.setVisibility(View.GONE);

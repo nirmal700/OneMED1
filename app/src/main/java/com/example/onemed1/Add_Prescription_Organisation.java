@@ -158,6 +158,7 @@ public class Add_Prescription_Organisation extends AppCompatActivity {
                         Map<String, Object> data = (Map<String, Object>) snapshot.getValue();
                         if (data == null) {
                             mEditPatientId.setError("Enter valid patient ID");
+                            progressDialog.cancel();
                             return;
                         } else {
                             String name = (String) data.get("Patient Name");
