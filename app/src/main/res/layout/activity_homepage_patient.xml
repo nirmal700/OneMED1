@@ -83,7 +83,7 @@
 
 
         <Button
-            android:id="@+id/Button3"
+            android:id="@+id/CallAmbulance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/ViewMyMeds"
@@ -97,7 +97,7 @@
             android:paddingTop="25dp"
             android:paddingEnd="12dp"
             android:paddingBottom="25dp"
-            android:text="Button 3"
+            android:text="Call Ambulance"
             android:textAllCaps="false"
             android:textColor="@android:color/black"
             android:textSize="25sp" />
@@ -106,7 +106,7 @@
             android:id="@+id/Button4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/Button3"
+            android:layout_below="@id/CallAmbulance"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"

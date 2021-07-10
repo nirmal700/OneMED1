@@ -2,8 +2,15 @@ package com.example.onemed1;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +29,7 @@ import java.util.Map;
 
 public class Homepage_Patient extends AppCompatActivity {
     TextView textView;
-    Button mViewmydetails,mViewMyMeds;
+    Button mViewmydetails,mViewMyMeds,mCallAmbulance;
     String Name="",Pid="",mPid="",mName="";
     private FirebaseDatabase mDatabase;
     private DatabaseReference mRef;
@@ -37,6 +44,7 @@ public class Homepage_Patient extends AppCompatActivity {
         textView = findViewById(R.id.text_view_name);
         mViewMyMeds=findViewById(R.id.ViewMyMeds);
         mViewmydetails = findViewById(R.id.ViewMyDetails);
+        mCallAmbulance=findViewById(R.id.CallAmbulance);
         Intent intent = getIntent();
         String email = intent.getStringExtra(MainActivity.USER_MAIL);
         mRef.orderByChild("Email").equalTo(email).addValueEventListener(new ValueEventListener() {
@@ -76,6 +84,42 @@ public class Homepage_Patient extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        mCallAmbulance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-    }
+//                    callAmbulance();
+                }
+            });
+
+        }
+
+//    private void callAmbulance() {
+//        AlertDialog.Builder dialog = new AlertDialog.Builder(Homepage_Patient.this);
+//        dialog.setMessage("Are you sure you want to call an ambulance?")
+//                .setCancelable(false)
+//                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        Intent phoneIntent = new Intent(Intent.ACTION_CALL);
+//                        phoneIntent.setData(Uri.parse("tel:7008000094"));
+//                        Intent callIntent = new Intent(Intent.ACTION_CALL);
+//                        callIntent.setData(Uri.parse("tel:0377778888"));
+//                        startActivity(phoneIntent);
+//                        if (ActivityCompat.checkSelfPermission(Homepage_Patient.this,
+//                                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+//                            mCallAmbulance.setError("Permisson Granted");
+//                            return;
+//                        }
+//                        startActivity(callIntent);
+//                    }
+//                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                dialog.cancel();
+//            }
+//        }).setTitle("Call Ambulance");
+//
+//        dialog.show();
+//    }
 }
