@@ -56,7 +56,7 @@ public class MedicalRecords_Recyler extends AppCompatActivity {
 
 
         CollectionReference collectionReference = FirebaseFirestore.getInstance().collection("Patient Medical Records");
-        Query query = collectionReference.whereEqualTo("mPatientID","100");
+        Query query = collectionReference.whereEqualTo("mPatientID",mPatientid);
         FirestoreRecyclerOptions<UploadMedicalRecords> options = new FirestoreRecyclerOptions.Builder<UploadMedicalRecords>()
                 .setQuery(query,UploadMedicalRecords.class)
                 .build();
@@ -71,12 +71,12 @@ public class MedicalRecords_Recyler extends AppCompatActivity {
             @Override
             public void onItemClick(int position, DocumentSnapshot documentSnapshot) {
                 UploadMedicalRecords medicalRecord = documentSnapshot.toObject(UploadMedicalRecords.class);
-                String Title =medicalRecord.getmTitle();
-                String url = medicalRecord.getmImageURI();
-                Intent intent = new Intent(MedicalRecords_Recyler.this, ViewMedicalRecord.class);
-                intent.putExtra(MEDICAL_RECORD_TITLE,Title);
-                intent.putExtra(MEDICAL_RECORD_URL,url);
-                startActivity(intent);
+                if (medicalRecord != null) {
+                    String Title = medicalRecord.getmTitle();
+                    Intent intent = new Intent(MedicalRecords_Recyler.this, ViewMedicalRecord.class);
+                    intent.putExtra(MEDICAL_RECORD_TITLE, Title);
+                    startActivity(intent);
+                }
             }
         });
     }

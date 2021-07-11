@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,7 +31,7 @@ import java.util.Map;
 public class Homepage_Patient extends AppCompatActivity {
     TextView textView;
     Button mViewmydetails,mViewMyMeds,mCallAmbulance,mMedicalRecord;
-    String Name="",Pid="",mPid="",mName="";
+    String Name="",Pid="",mPid="",mName="",mAuthMail;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mRef;
     public static final String USER_PATIENT = "com.example.onemed1.username.pid";
@@ -39,6 +40,11 @@ public class Homepage_Patient extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage_patient);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(FirebaseAuth.getInstance().getCurrentUser() == null) {
+            mAuthMail = "cst.20bcta16@gmail.ac.in";
+        } else {
+            mAuthMail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        }
         mDatabase = FirebaseDatabase.getInstance();
         mRef = mDatabase.getReference("Login Info");
         textView = findViewById(R.id.text_view_name);
@@ -48,7 +54,7 @@ public class Homepage_Patient extends AppCompatActivity {
         mMedicalRecord = findViewById(R.id.Medical_records);
         Intent intent = getIntent();
         String email = intent.getStringExtra(MainActivity.USER_MAIL);
-        mRef.orderByChild("Email").equalTo(email).addValueEventListener(new ValueEventListener() {
+        mRef.orderByChild("Email").equalTo(mAuthMail).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NotNull DataSnapshot snapshot) {
                 for (@NotNull DataSnapshot snap : snapshot.getChildren()) {
@@ -61,20 +67,20 @@ public class Homepage_Patient extends AppCompatActivity {
                            mPid = Pid;
                            mName=Name;
                             textView.setText("Hi! Mr.  " +mName+  "\nPatient ID:" + Pid);
-                            mViewmydetails.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    Intent intent = new Intent(Homepage_Patient.this, ViewMyDetailsPatient.class);
-                                    intent.putExtra(USER_PATIENT,Pid);
-                                    startActivity(intent);
-                                }
-                            });
                        }
                     }
                 }
             @Override
             public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
+            }
+        });
+        mViewmydetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Homepage_Patient.this, ViewMyDetailsPatient.class);
+                intent.putExtra(USER_PATIENT,Pid);
+                startActivity(intent);
             }
         });
         mViewMyMeds.setOnClickListener(new View.OnClickListener() {

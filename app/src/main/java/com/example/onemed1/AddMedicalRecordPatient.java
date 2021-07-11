@@ -43,20 +43,21 @@ public class AddMedicalRecordPatient extends AppCompatActivity {
     private Uri mImageUri;
     private StorageReference mStorageRef;
     private CollectionReference mCollectionRef;
-    private String mPatientid;
+    private String mPatientid="";
     private StorageTask mUploadTask;
     private ProgressBar mProgressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_medical_record_patient);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mButtonChoose=findViewById(R.id.button_choose_file_medical_records);
         mImageview = findViewById(R.id.imageView3);
         mStorageRef= FirebaseStorage.getInstance().getReference("Patient Health Records");
         mCollectionRef= FirebaseFirestore.getInstance().collection("Patient Medical Records");
         mEditText=findViewById(R.id.edit_text_add_medical_record_title);
         Intent intent = getIntent();
-        mPatientid=intent.getStringExtra(MedicalRecords_Recyler.MEDICAL_RECORD_PID);
+        mPatientid=intent.getStringExtra(Homepage_Patient.USER_PATIENT);
         mUpload=findViewById(R.id.button_upload_document_medical_records);
         mProgressBar=findViewById(R.id.progressBar2);
         mButtonChoose.setOnClickListener(new View.OnClickListener() {
@@ -101,7 +102,7 @@ public class AddMedicalRecordPatient extends AppCompatActivity {
                     UploadMedicalRecords upload = new UploadMedicalRecords(mEditText.getText().toString(),
                             taskSnapshot.getUploadSessionUri().toString(),mPatientid);
                     mCollectionRef.add(upload);
-                    Intent intent = new Intent(AddMedicalRecordPatient.this, MedicalRecords_Recyler.class);
+                    Intent intent = new Intent(AddMedicalRecordPatient.this, Homepage_Patient.class);
                     startActivity(intent);
                 }
             }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
