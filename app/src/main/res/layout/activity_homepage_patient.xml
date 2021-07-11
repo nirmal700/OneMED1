@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#81D4FA">
@@ -50,7 +51,8 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/custom_button_border"
-            android:drawableStart="@drawable/ic_approve"
+            android:checkable="false"
+            android:drawableLeft="@drawable/ic_approve"
             android:gravity="center"
             android:paddingStart="12dp"
             android:paddingTop="25dp"
@@ -59,7 +61,9 @@
             android:text="View My Details"
             android:textAllCaps="false"
             android:textColor="@android:color/black"
-            android:textSize="25sp" />
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/light_blue" />
 
         <Button
             android:id="@+id/ViewMyMeds"
@@ -70,7 +74,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/custom_button_border"
-            android:drawableStart="@drawable/ic_pending"
+            android:drawableLeft="@drawable/ic_viewmeds"
             android:gravity="center"
             android:paddingStart="8dp"
             android:paddingTop="25dp"
@@ -79,7 +83,9 @@
             android:text="View My Meds"
             android:textAllCaps="false"
             android:textColor="@android:color/black"
-            android:textSize="25sp" />
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/light_blue" />
 
 
         <Button
@@ -91,7 +97,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/custom_button_border"
-            android:drawableStart="@drawable/ic_check_appointment"
+            android:drawableLeft="@drawable/ic_siren"
             android:gravity="center"
             android:paddingStart="8dp"
             android:paddingTop="25dp"
@@ -100,7 +106,9 @@
             android:text="Call Ambulance"
             android:textAllCaps="false"
             android:textColor="@android:color/black"
-            android:textSize="25sp" />
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/light_blue" />
 
         <Button
             android:id="@+id/Medical_records"
@@ -111,7 +119,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/custom_button_border"
-            android:drawableStart="@drawable/ic_patient"
+            android:drawableLeft="@drawable/ic_medical_record"
             android:gravity="center"
             android:paddingStart="12dp"
             android:paddingTop="25dp"
@@ -120,7 +128,9 @@
             android:text="Medical Records"
             android:textAllCaps="false"
             android:textColor="@android:color/black"
-            android:textSize="25sp" />
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/light_blue" />
 
     </RelativeLayout>
 
