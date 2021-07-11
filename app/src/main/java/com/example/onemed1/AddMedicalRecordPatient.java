@@ -23,9 +23,12 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
 import org.jetbrains.annotations.NotNull;
@@ -39,8 +42,9 @@ public class AddMedicalRecordPatient extends AppCompatActivity {
     private ImageView mImageview;
     private Uri mImageUri;
     private StorageReference mStorageRef;
-    private DatabaseReference mDatabaseRef;
+    private CollectionReference mCollectionRef;
     private String mPatientid;
+    private StorageTask mUploadTask;
     private ProgressBar mProgressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +53,7 @@ public class AddMedicalRecordPatient extends AppCompatActivity {
         mButtonChoose=findViewById(R.id.button_choose_file_medical_records);
         mImageview = findViewById(R.id.imageView3);
         mStorageRef= FirebaseStorage.getInstance().getReference("Patient Health Records");
-        mDatabaseRef= FirebaseDatabase.getInstance().getReference("Patient Medical Records");
+        mCollectionRef= FirebaseFirestore.getInstance().collection("Patient Medical Records");
         mEditText=findViewById(R.id.edit_text_add_medical_record_title);
         Intent intent = getIntent();
         mPatientid=intent.getStringExtra(Homepage_Patient.USER_PATIENT);
@@ -64,7 +68,11 @@ public class AddMedicalRecordPatient extends AppCompatActivity {
         mUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UploadFile();
+                if (mUploadTask != null && mUploadTask.isInProgress()) {
+                    Toast.makeText(AddMedicalRecordPatient.this, "Upload in progress", Toast.LENGTH_SHORT).show();
+                } else {
+                    UploadFile();
+                }
             }
         });
 
@@ -79,7 +87,7 @@ public class AddMedicalRecordPatient extends AppCompatActivity {
         if(mImageUri!=null)
         {
             StorageReference fileref =mStorageRef.child(mEditText.getText().toString()+""+System.currentTimeMillis()+"."+getFileExtension(mImageUri));
-            fileref.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+           mUploadTask = fileref.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Handler handler = new Handler();
@@ -92,14 +100,13 @@ public class AddMedicalRecordPatient extends AppCompatActivity {
                     Toast.makeText(AddMedicalRecordPatient.this, "Upload successful", Toast.LENGTH_LONG).show();
                     UploadMedicalRecords upload = new UploadMedicalRecords(mEditText.getText().toString(),
                             taskSnapshot.getUploadSessionUri().toString(),mPatientid);
-                    String uploadId = mDatabaseRef.push().getKey();
-                    mDatabaseRef.child(uploadId).setValue(upload);
+                    mCollectionRef.add(upload);
                 }
             }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onProgress(@NonNull @NotNull UploadTask.TaskSnapshot snapshot) {
                     double progress = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
-                    mProgressBar.setProgress((int) progress);
+                     mProgressBar.setProgress((int) progress);
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
