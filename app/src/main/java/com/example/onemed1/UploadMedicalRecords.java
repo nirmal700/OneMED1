@@ -5,13 +5,13 @@ public class UploadMedicalRecords {
     private String mImageURI;
     private String mPatientID;
 
+    public UploadMedicalRecords() {
+    }
+
     public UploadMedicalRecords(String mTitle, String mImageURI, String mPatientID) {
         this.mTitle = mTitle;
         this.mImageURI = mImageURI;
         this.mPatientID = mPatientID;
-    }
-
-    public UploadMedicalRecords() {
     }
 
     public String getmTitle() {

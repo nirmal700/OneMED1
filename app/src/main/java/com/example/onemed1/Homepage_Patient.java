@@ -95,7 +95,7 @@ public class Homepage_Patient extends AppCompatActivity {
         mMedicalRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Homepage_Patient.this, AddMedicalRecordPatient.class);
+                Intent intent = new Intent(Homepage_Patient.this, MedicalRecords_Recyler.class);
                 intent.putExtra(USER_PATIENT,Pid);
                 startActivity(intent);
             }

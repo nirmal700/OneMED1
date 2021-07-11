@@ -56,7 +56,7 @@ public class AddMedicalRecordPatient extends AppCompatActivity {
         mCollectionRef= FirebaseFirestore.getInstance().collection("Patient Medical Records");
         mEditText=findViewById(R.id.edit_text_add_medical_record_title);
         Intent intent = getIntent();
-        mPatientid=intent.getStringExtra(Homepage_Patient.USER_PATIENT);
+        mPatientid=intent.getStringExtra(MedicalRecords_Recyler.MEDICAL_RECORD_PID);
         mUpload=findViewById(R.id.button_upload_document_medical_records);
         mProgressBar=findViewById(R.id.progressBar2);
         mButtonChoose.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +86,7 @@ public class AddMedicalRecordPatient extends AppCompatActivity {
     private void UploadFile() {
         if(mImageUri!=null)
         {
-            StorageReference fileref =mStorageRef.child(mEditText.getText().toString()+""+System.currentTimeMillis()+"."+getFileExtension(mImageUri));
+            StorageReference fileref =mStorageRef.child(mEditText.getText().toString()+""+mPatientid+"."+getFileExtension(mImageUri));
            mUploadTask = fileref.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -101,6 +101,8 @@ public class AddMedicalRecordPatient extends AppCompatActivity {
                     UploadMedicalRecords upload = new UploadMedicalRecords(mEditText.getText().toString(),
                             taskSnapshot.getUploadSessionUri().toString(),mPatientid);
                     mCollectionRef.add(upload);
+                    Intent intent = new Intent(AddMedicalRecordPatient.this, MedicalRecords_Recyler.class);
+                    startActivity(intent);
                 }
             }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                 @Override

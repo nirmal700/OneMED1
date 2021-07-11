@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OneMED1">
-        <activity android:name=".AddMedicalRecordPatient"></activity>
+        <activity android:name=".ViewMedicalRecord"></activity>
+        <activity android:name=".MedicalRecords_Recyler" />
+        <activity android:name=".AddMedicalRecordPatient" />
         <activity android:name=".Prescription_Patient_Recycler" />
         <activity android:name=".Prescription_Recycler" />
         <activity android:name=".ViewMyDetailsPatient" />
