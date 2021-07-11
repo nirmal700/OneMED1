@@ -103,7 +103,7 @@
             android:textSize="25sp" />
 
         <Button
-            android:id="@+id/Button4"
+            android:id="@+id/Medical_records"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/CallAmbulance"
@@ -117,7 +117,7 @@
             android:paddingTop="25dp"
             android:paddingEnd="12dp"
             android:paddingBottom="25dp"
-            android:text="Button 4"
+            android:text="Medical Records"
             android:textAllCaps="false"
             android:textColor="@android:color/black"
             android:textSize="25sp" />

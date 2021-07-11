@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:padding="16dp"
+    android:gravity="center_vertical"
+    android:background="@drawable/custom_button_border"
+    android:layout_height="match_parent">
+
+
+    <Button
+        android:id="@+id/button_choose_file_medical_records"
+        android:layout_width="wrap_content"
+        android:layout_height="102dp"
+
+        android:layout_above="@+id/edit_text_add_medical_record_title"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="43dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="37dp"
+        android:layout_marginBottom="67dp"
+        android:background="@drawable/custom_button_border_2"
+        android:padding="8dp"
+        android:text="Choose File"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/edit_text_add_medical_record_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/imageView3"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="47dp"
+        android:layout_marginEnd="49dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/custom_button_border"
+        android:hint="Add Title"
+        android:padding="8dp"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/button_upload_document_medical_records"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/custom_button_border_2"
+        android:text="Upload Document"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:layout_above="@+id/button_upload_document_medical_records"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="45dp"
+        app:srcCompat="@drawable/ic_menu_gallery" />
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="28dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="591dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="96dp" />
+
+
+</RelativeLayout>

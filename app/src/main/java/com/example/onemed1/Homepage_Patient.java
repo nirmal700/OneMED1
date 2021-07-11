@@ -29,7 +29,7 @@ import java.util.Map;
 
 public class Homepage_Patient extends AppCompatActivity {
     TextView textView;
-    Button mViewmydetails,mViewMyMeds,mCallAmbulance;
+    Button mViewmydetails,mViewMyMeds,mCallAmbulance,mMedicalRecord;
     String Name="",Pid="",mPid="",mName="";
     private FirebaseDatabase mDatabase;
     private DatabaseReference mRef;
@@ -45,6 +45,7 @@ public class Homepage_Patient extends AppCompatActivity {
         mViewMyMeds=findViewById(R.id.ViewMyMeds);
         mViewmydetails = findViewById(R.id.ViewMyDetails);
         mCallAmbulance=findViewById(R.id.CallAmbulance);
+        mMedicalRecord = findViewById(R.id.Medical_records);
         Intent intent = getIntent();
         String email = intent.getStringExtra(MainActivity.USER_MAIL);
         mRef.orderByChild("Email").equalTo(email).addValueEventListener(new ValueEventListener() {
@@ -91,8 +92,16 @@ public class Homepage_Patient extends AppCompatActivity {
 //                    callAmbulance();
                 }
             });
-
+        mMedicalRecord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Homepage_Patient.this, AddMedicalRecordPatient.class);
+                intent.putExtra(USER_PATIENT,Pid);
+                startActivity(intent);
+            }
+        });
         }
+
 
 //    private void callAmbulance() {
 //        AlertDialog.Builder dialog = new AlertDialog.Builder(Homepage_Patient.this);
