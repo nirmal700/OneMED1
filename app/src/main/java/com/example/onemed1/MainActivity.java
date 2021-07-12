@@ -14,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -35,6 +37,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -57,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     String oEm="",oPs="",oNm="";
     public String snip;
     public int sn = 0;
+    private Doctor doctor;
     FloatingActionButton fab;
     Spinner spinner;
     public static final String USER_NAME = "com.example.onemed1.username";
@@ -232,43 +239,53 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
     //Validating the login of the user if he is from the organisation by checking the user-id node with the password in the child of the parent node
     public void validate_organisation(String em, String ps) {
-        mRef.child("Organisation Users").child(em).addValueEventListener(new ValueEventListener() {
+        CollectionReference collectionReference = FirebaseFirestore.getInstance().collection("Doctors");
+        collectionReference.whereEqualTo("oid", em).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
-            public void onDataChange(@NotNull DataSnapshot snapshot) {
-                Map<String, Object> data = (Map<String, Object>) snapshot.getValue();
-                oEm = snapshot.child("oid").getValue(String.class);
-                oPs = snapshot.child("password").getValue(String.class);
-                oNm = snapshot.child("Name").getValue(String.class);
-                if (oEm != null && oPs != null) {
-                    if (oEm.equals(em) && oPs.equals(ps)) {
-                        Toast.makeText(MainActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(MainActivity.this, Homepage_activity.class);
-                        intent.putExtra(USER_NAME, oNm);
-                        intent.putExtra(USER_MAIL,em);
-                        progressBar.setVisibility(View.GONE);
-                        startActivity(intent);
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                if (queryDocumentSnapshots != null) {
+                    for (DocumentSnapshot snapshot : queryDocumentSnapshots) {
+                        doctor = snapshot.toObject(Doctor.class);
+                        break;
                     }
-                    else
-                    {
-                        mPassword.setError("Password maybe incorrect");
+//        mRef.child("Organisation Users").child(em).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NotNull DataSnapshot snapshot) {
+//                Map<String, Object> data = (Map<String, Object>) snapshot.getValue();
+//                oEm = snapshot.child("oid").getValue(String.class);
+//                oPs = snapshot.child("password").getValue(String.class);
+//                oNm = snapshot.child("Name").getValue(String.class);
+                    oEm = doctor.getOid();
+                    oPs = doctor.getPassword();
+                    oNm = doctor.getName();
+
+                    if (oEm != null && oPs != null) {
+                        if (oEm.equals(em) && oPs.equals(ps)) {
+                            Toast.makeText(MainActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(MainActivity.this, Homepage_activity.class);
+                            intent.putExtra(USER_NAME, oNm);
+                            intent.putExtra(USER_MAIL, em);
+                            progressBar.setVisibility(View.GONE);
+                            startActivity(intent);
+                        } else {
+                            mPassword.setError("Password maybe incorrect");
+                            mEmail.setError("User-id Maybe incorrect");
+                            progressBar.setVisibility(View.GONE);
+                        }
+                    } else {
+                        mPassword.setError("Password incorrect");
                         mEmail.setError("User-id Maybe incorrect");
                         progressBar.setVisibility(View.GONE);
                     }
                 }
-                else
-                {
-                    mPassword.setError("Password incorrect");
-                    mEmail.setError("User-id Maybe incorrect");
-                    progressBar.setVisibility(View.GONE);
-                }
             }
-
-            @Override
-            public void onCancelled(@NotNull DatabaseError error) {
+        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_LONG).show();
+                    }
+                });;
             }
-        });
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
