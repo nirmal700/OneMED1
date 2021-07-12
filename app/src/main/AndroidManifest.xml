@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OneMED1">
-        <activity android:name=".PendingAppointmentRecycler"></activity>
+        <activity android:name=".CompletedAppointmentRecycler"></activity>
+        <activity android:name=".PendingAppointmentRecycler" />
         <activity android:name=".ApproveAppointmentRecycler" />
         <activity android:name=".AppointmentPatient_Recycler" />
         <activity android:name=".AppointmentBooking" />
