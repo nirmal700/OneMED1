@@ -153,6 +153,75 @@
             android:textStyle="bold"
             app:backgroundTint="@color/light_blue" />
 
+        <Button
+            android:id="@+id/button_approve_appointments"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Button5"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+
+            android:background="@drawable/custom_button_border"
+            android:drawableLeft="@drawable/ic_approve"
+            android:gravity="center"
+            android:paddingStart="12dp"
+            android:paddingTop="25dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="25dp"
+            android:text="Approve Appointments"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/light_blue" />
+
+        <Button
+            android:id="@+id/button_pending_appointments"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/button_approve_appointments"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/custom_button_border"
+            android:drawableLeft="@drawable/ic_pending"
+            android:gravity="center"
+            android:paddingStart="8dp"
+            android:paddingTop="25dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="25dp"
+            android:text="Pending Appointments"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/light_blue" />
+
+
+        <Button
+            android:id="@+id/button_completed_appointments"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/button_pending_appointments"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/custom_button_border"
+            android:drawableLeft="@drawable/ic_check_appointment"
+            android:gravity="center"
+            android:paddingStart="8dp"
+            android:paddingTop="25dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="25dp"
+            android:text="Completed Appointments"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/light_blue" />
+
+
     </RelativeLayout>
 
 </ScrollView>

@@ -15,9 +15,10 @@ public class Homepage_activity extends AppCompatActivity {
     TextView textView;
     Button mAddpatient;
     Button mViewpatient;
-    Button mUpdelpatient,mPrescribeMed,mViewmeds;
+    Button mUpdelpatient,mPrescribeMed,mViewmeds,mApprove,mPending,mCompleted;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mRef;
+    public static String name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,8 +32,11 @@ public class Homepage_activity extends AppCompatActivity {
         mUpdelpatient=findViewById(R.id.Button3);
         mPrescribeMed=findViewById(R.id.Button4);
         mViewmeds=findViewById(R.id.Button5);
+        mApprove=findViewById(R.id.button_approve_appointments);
+        mPending=findViewById(R.id.button_pending_appointments);
+        mCompleted=findViewById(R.id.button_completed_appointments);
         Intent intent = getIntent();
-        String name = intent.getStringExtra(MainActivity.USER_NAME);
+        name = intent.getStringExtra(MainActivity.USER_NAME);
 //        String mail= intent.getStringExtra(MainActivity.USER_MAIL);
 //        mRef.orderByChild("Email").equalTo("cst.20bcta16@gmail.com").addValueEventListener(new ValueEventListener() {
 //            @Override
@@ -83,6 +87,13 @@ public class Homepage_activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Homepage_activity.this, Prescription_Recycler.class);
+                startActivity(intent);
+            }
+        });
+        mApprove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Homepage_activity.this, ApproveAppointmentRecycler.class);
                 startActivity(intent);
             }
         });
