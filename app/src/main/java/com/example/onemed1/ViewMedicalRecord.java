@@ -48,6 +48,8 @@ public class ViewMedicalRecord extends AppCompatActivity {
         } else {
             mAuthMail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         }
+        Intent intent = getIntent();
+        title=intent.getStringExtra(MedicalRecords_Recyler.MEDICAL_RECORD_TITLE);
         textViewInfoTitle = findViewById(R.id.text_view_medical_records_info_title);
         imageViewInfoImage = findViewById(R.id.image_view_medical_record);
         mDatabase = FirebaseDatabase.getInstance();
