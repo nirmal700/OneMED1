@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -39,7 +40,7 @@ public class AppointmentBooking extends AppCompatActivity {
     private List<Boolean> listTomorrow;
     private Doctor doctor;
     private String doctorId;
-    private String authNumber="";
+    private String pid;
     private Calendar time;
     private Calendar currentTime;
     public static final String[] times = new String[]{"10:00 - 10:15 AM","10:15 - 10:30 AM","10:30 - 10:45 AM","10:45 - 11:00 AM","11:00 - 11:15 AM","11:15 - 11:30 AM","11:30 - 11:45 AM","11:45 - 12:00 PM","12:00 - 12:15 PM","12:15 - 12:30 PM","12:30 - 12:45 PM","12:45 - 1:00 PM"};
@@ -56,6 +57,8 @@ public class AppointmentBooking extends AppCompatActivity {
         currentTime = Calendar.getInstance();
 
         today = true;
+
+        pid=Homepage_Patient.mPid;
 
         dialog = new ProgressDialog(AppointmentBooking.this);
         dialog.setMessage("Loading Available Slots...");
@@ -214,12 +217,13 @@ public class AppointmentBooking extends AppCompatActivity {
         if(timeSlot == -1){
             Toast.makeText(AppointmentBooking.this,"Please Choose A Slot",Toast.LENGTH_SHORT).show();
         } else {
-            Appointment appointment = new Appointment(authNumber,name,appointmentDate, appointmentTime,false,false,Homepage_Patient.mName);
+            Appointment appointment = new Appointment(pid,name,appointmentDate, appointmentTime,false,false,Homepage_Patient.mName);
             CollectionReference collectionReference = FirebaseFirestore.getInstance().collection("Appointments");
             collectionReference.add(appointment);
             updateDoctorSchedule(name,timeSlot);
             Toast.makeText(AppointmentBooking.this,"Appointment Booked",Toast.LENGTH_SHORT).show();
-
+            Intent intent = new Intent(AppointmentBooking.this,AppointmentPatient_Recycler.class);
+            startActivity(intent);
         }
     }
 
