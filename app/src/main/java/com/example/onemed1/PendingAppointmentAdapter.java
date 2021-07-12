@@ -11,10 +11,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Map;
 
 public class PendingAppointmentAdapter extends FirestoreRecyclerAdapter<Appointment, PendingAppointmentAdapter.PendingHolder> {
 
     private OnItemClickListener listener;
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mRef;
 
     public PendingAppointmentAdapter(@NonNull FirestoreRecyclerOptions<Appointment> options, OnItemClickListener listener) {
         super(options);
@@ -54,26 +65,55 @@ public class PendingAppointmentAdapter extends FirestoreRecyclerAdapter<Appointm
             textViewAppointmentTime = itemView.findViewById(R.id.text_view_item_pending_appointment_time);
             imageViewCall = itemView.findViewById(R.id.image_view_call_patient);
             imageViewMessage = itemView.findViewById(R.id.image_view_message_patient);
-
             imageViewCall.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    mDatabase=FirebaseDatabase.getInstance();
                     int position = getAdapterPosition();
                     String number = getSnapshots().getSnapshot(position).toObject(Appointment.class).getId();
-                    if (number != null && listener != null) {
-                        listener.onCallClick(number);
-                    }
+                    mRef=mDatabase.getReference("Patient Info");
+
+                    mRef.child(number).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                            Map<String,Object> data = (Map<String, Object>)snapshot.getValue();
+                            String cno = (String) data.get("Patient Contact Number");
+                            if (cno != null ) {
+                                listener.onCallClick(cno);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                        }
+                    });
+
                 }
             });
 
             imageViewMessage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    mDatabase=FirebaseDatabase.getInstance();
                     int position = getAdapterPosition();
                     String number = getSnapshots().getSnapshot(position).toObject(Appointment.class).getId();
-                    if(number != null && listener != null) {
-                        listener.onMessageClick(number);
-                    }
+                    mRef=mDatabase.getReference("Patient Info");
+                    mRef.child(number).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                            Map<String,Object> data = (Map<String, Object>)snapshot.getValue();
+                            String cno = (String) data.get("Patient Contact Number");
+                            if (cno != null ) {
+                                listener.onMessageClick(cno);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                        }
+                    });
                 }
             });
 
