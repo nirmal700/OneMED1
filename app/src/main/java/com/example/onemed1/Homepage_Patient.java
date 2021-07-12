@@ -30,8 +30,8 @@ import java.util.Map;
 
 public class Homepage_Patient extends AppCompatActivity {
     TextView textView;
-    Button mViewmydetails,mViewMyMeds,mCallAmbulance,mMedicalRecord;
-    String Name="",Pid="",mPid="",mName="",mAuthMail;
+    Button mViewmydetails,mViewMyMeds,mCallAmbulance,mMedicalRecord,mBookApp;
+    public static String Name="",Pid="",mPid="",mName="",mAuthMail;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mRef;
     public static final String USER_PATIENT = "com.example.onemed1.username.pid";
@@ -51,6 +51,7 @@ public class Homepage_Patient extends AppCompatActivity {
         mViewMyMeds=findViewById(R.id.ViewMyMeds);
         mViewmydetails = findViewById(R.id.ViewMyDetails);
         mCallAmbulance=findViewById(R.id.CallAmbulance);
+        mBookApp = findViewById(R.id.book_appointment);
         mMedicalRecord = findViewById(R.id.Medical_records);
         Intent intent = getIntent();
         String email = intent.getStringExtra(MainActivity.USER_MAIL);
@@ -98,6 +99,14 @@ public class Homepage_Patient extends AppCompatActivity {
 //                    callAmbulance();
                 }
             });
+        mBookApp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(Homepage_Patient.this, "Appointment..", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(Homepage_Patient.this,AppointmentBooking.class);
+                startActivity(i);
+            }
+        });
         mMedicalRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,7 +115,7 @@ public class Homepage_Patient extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        }
+    }
 
 
 //    private void callAmbulance() {
