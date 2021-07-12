@@ -10,6 +10,7 @@ import android.os.Bundle;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
@@ -51,7 +52,15 @@ public class PendingAppointmentRecycler extends AppCompatActivity {
                 messageIntent.setData(Uri.parse("sms:"+number));
                 startActivity(messageIntent);
             }
+            @Override
+            public void onConsulted(int position, final DocumentSnapshot documentSnapshot)
+            {
+                String id = documentSnapshot.getId();
+                collectionReference.document(id).update("appointmentDone",true);
+            }
         });
+
+
         recyclerView.setLayoutManager(new LinearLayoutManager(PendingAppointmentRecycler.this));
         recyclerView.setAdapter(adapter);
     }

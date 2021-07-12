@@ -129,6 +129,17 @@
             android:layout_below="@id/text_view_item_pending_appointment_time"
             android:layout_marginTop="12dp"/>
 
+        <Button
+            android:id="@+id/consulted"
+            android:layout_width="181dp"
+            android:layout_height="35dp"
+            android:layout_below="@+id/text4"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="193dp"
+            android:text="Consulted" />
 
 
     </RelativeLayout>

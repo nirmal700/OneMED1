@@ -3,6 +3,7 @@ package com.example.onemed1;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +17,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -55,6 +57,7 @@ public class PendingAppointmentAdapter extends FirestoreRecyclerAdapter<Appointm
         private TextView textViewAppointmentTime;
         private ImageView imageViewCall;
         private ImageView imageViewMessage;
+        private Button mConsulted;
 
         public PendingHolder(@NonNull View itemView) {
             super(itemView);
@@ -63,6 +66,7 @@ public class PendingAppointmentAdapter extends FirestoreRecyclerAdapter<Appointm
             textViewPatientContact = itemView.findViewById(R.id.text_view_item_pending_appointment_patient_contact);
             textViewAppointmentDate = itemView.findViewById(R.id.text_view_item_pending_appointment_date);
             textViewAppointmentTime = itemView.findViewById(R.id.text_view_item_pending_appointment_time);
+            mConsulted=itemView.findViewById(R.id.consulted);
             imageViewCall = itemView.findViewById(R.id.image_view_call_patient);
             imageViewMessage = itemView.findViewById(R.id.image_view_message_patient);
             imageViewCall.setOnClickListener(new View.OnClickListener() {
@@ -116,6 +120,16 @@ public class PendingAppointmentAdapter extends FirestoreRecyclerAdapter<Appointm
                     });
                 }
             });
+            mConsulted.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    DocumentSnapshot documentSnapshot = getSnapshots().getSnapshot(position);
+                    if (listener != null && position != RecyclerView.NO_POSITION) {
+                        listener.onConsulted(position,documentSnapshot);
+                    }
+                }
+            });
 
         }
     }
@@ -123,6 +137,8 @@ public class PendingAppointmentAdapter extends FirestoreRecyclerAdapter<Appointm
     public interface OnItemClickListener {
         void onCallClick(String number);
         void onMessageClick(String number);
+
+        void onConsulted(int position, DocumentSnapshot documentSnapshot);
     }
 }
 

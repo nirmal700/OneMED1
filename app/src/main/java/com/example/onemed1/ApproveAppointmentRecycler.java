@@ -18,6 +18,7 @@ import com.google.firebase.firestore.Query;
 public class ApproveAppointmentRecycler extends AppCompatActivity {
     private RecyclerView recyclerViewAppointmentList;
     private ApproveAppointmentAdapter adapter;
+    private CollectionReference collectionReference = FirebaseFirestore.getInstance().collection("Appointments");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +27,6 @@ public class ApproveAppointmentRecycler extends AppCompatActivity {
         buildRecyclerView();
     }
     private void buildRecyclerView() {
-        final CollectionReference collectionReference = FirebaseFirestore.getInstance().collection("Appointments");
         Toast.makeText(this, ""+Homepage_activity.name, Toast.LENGTH_SHORT).show();
         Query query = collectionReference.whereEqualTo("appointmentAccepted",false).whereEqualTo("appointmentDone",false).whereEqualTo("doctorName", Homepage_activity.name);
         FirestoreRecyclerOptions<Appointment> options = new FirestoreRecyclerOptions.Builder<Appointment>()

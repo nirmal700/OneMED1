@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.CollectionReference;
@@ -27,6 +28,7 @@ public class CompletedAppointmentRecycler extends AppCompatActivity {
 
     private void buildRecyclerView() {
         Query query = collectionReference.whereEqualTo("doctorName", Homepage_activity.name).whereEqualTo("appointmentDone",true);
+        Toast.makeText(this, ""+Homepage_activity.name, Toast.LENGTH_SHORT).show();
         FirestoreRecyclerOptions<Appointment> options = new FirestoreRecyclerOptions.Builder<Appointment>()
                 .setQuery(query,Appointment.class)
                 .build();

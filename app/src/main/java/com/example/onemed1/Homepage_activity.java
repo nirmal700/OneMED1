@@ -104,5 +104,12 @@ public class Homepage_activity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        mCompleted.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Homepage_activity.this, CompletedAppointmentRecycler.class);
+                startActivity(intent);
+            }
+        });
     }
 }
