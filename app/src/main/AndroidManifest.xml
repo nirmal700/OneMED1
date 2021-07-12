@@ -24,14 +24,11 @@
             android:parentActivityName=".Homepage_Patient"/>
         <activity android:name=".Add_Prescription_Organisation" />
         <activity
-            android:name=".Update_Delete_Patient"
-            android:parentActivityName=".Homepage_activity" />
+            android:name=".Update_Delete_Patient" />
         <activity
-            android:name=".View_Patient_Details"
-            android:parentActivityName=".Homepage_activity" />
+            android:name=".View_Patient_Details" />
         <activity
-            android:name=".PatientAddinfo"
-            android:parentActivityName=".Homepage_activity" />
+            android:name=".PatientAddinfo" />
         <activity android:name=".Register" />
         <activity
             android:name=".Homepage_Patient"
