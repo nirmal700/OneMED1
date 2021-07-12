@@ -297,11 +297,17 @@
             <Button
 
                 android:id="@+id/saveid"
-                android:layout_width="100dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="130dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:drawableLeft="@drawable/ic_baseline_person_add_24"
+
+                android:gravity="center"
                 android:text="Save"
-                android:textStyle="bold" />
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                app:iconGravity="textStart" />
         </LinearLayout>
 
     </LinearLayout>
