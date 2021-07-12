@@ -103,7 +103,7 @@ public class Homepage_Patient extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(Homepage_Patient.this, "Appointment..", Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(Homepage_Patient.this,AppointmentBooking.class);
+                Intent i = new Intent(Homepage_Patient.this,AppointmentPatient_Recycler.class);
                 startActivity(i);
             }
         });
