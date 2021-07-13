@@ -78,12 +78,12 @@
             android:layout_below="@id/text_view_doctor_prescription_medicine_name"
             android:layout_marginBottom="10dp"
             android:text="Time : "
-            android:textSize="20sp" />
+            android:textSize="25sp" />
 
         <Button
             android:id="@+id/button_breakfast_doctor_prescription"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="95dp"
+            android:layout_height="60dp"
             android:layout_below="@id/text_view_doctor_prescription_medicine_name"
             android:layout_alignTop="@id/text_3"
             android:layout_alignBottom="@id/text_3"
@@ -98,7 +98,7 @@
         <Button
             android:id="@+id/button_lunch_doctor_prescription"
             android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_below="@id/text_view_doctor_prescription_medicine_name"
             android:layout_alignTop="@id/button_breakfast_doctor_prescription"
             android:layout_alignBottom="@id/button_breakfast_doctor_prescription"
@@ -113,8 +113,8 @@
 
         <Button
             android:id="@+id/button_dinner_doctor_prescription"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
+            android:layout_width="85dp"
+            android:layout_height="60dp"
             android:layout_below="@id/text_view_doctor_prescription_medicine_name"
             android:layout_alignTop="@id/button_breakfast_doctor_prescription"
             android:layout_alignBottom="@id/button_breakfast_doctor_prescription"
