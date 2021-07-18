@@ -73,7 +73,7 @@ public class Homepage_Patient extends AppCompatActivity {
                 }
             @Override
             public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
+                Toast.makeText(Homepage_Patient.this, "" + error, Toast.LENGTH_SHORT).show();
             }
         });
         mViewmydetails.setOnClickListener(new View.OnClickListener() {
