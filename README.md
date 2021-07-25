@@ -23,8 +23,4 @@ in one go. No more chits and handwritten prescriptions.
 4. Firebase Firestore 
 5. Firebase Authentication
 
-## Team Members
 
-  [K Nirmal Kumar](https://github.com/nirmal700)
- 
- 
