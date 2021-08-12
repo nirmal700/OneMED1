@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OneMED1">
-        <activity android:name=".CompletedAppointmentRecycler"></activity>
+        <activity android:name=".CompletedAppointmentRecycler" />
         <activity android:name=".PendingAppointmentRecycler" />
         <activity android:name=".ApproveAppointmentRecycler" />
         <activity android:name=".AppointmentPatient_Recycler" />
@@ -48,7 +48,8 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.OneMED1.NoActionBar">
+            android:theme="@style/Theme.OneMED1.NoActionBar"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
