@@ -6,11 +6,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_margin="5dp"
+    android:background="@drawable/custom_button_border"
     tools:context=".PatientAddinfo">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="668dp"
+        android:layout_height="match_parent"
         android:layout_margin="20dp"
         android:orientation="vertical"
         tools:context=".AppointActivity">
