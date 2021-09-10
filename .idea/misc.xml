@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/accept_button_border.xml" value="0.3109375" />
+        <entry key="app/src/main/res/drawable/custom_button_border.xml" value="0.3109375" />
         <entry key="app/src/main/res/layout/activity_add_medical_record_patient.xml" value="0.23822463768115942" />
         <entry key="app/src/main/res/layout/activity_add_prescription_organisation.xml" value="0.2346014492753623" />
         <entry key="app/src/main/res/layout/activity_apoointment_booking.xml" value="0.2346014492753623" />
@@ -18,6 +20,8 @@
         <entry key="app/src/main/res/layout/activity_view_medical_record.xml" value="0.2346014492753623" />
         <entry key="app/src/main/res/layout/activity_view_my_details_patient.xml" value="0.2346014492753623" />
         <entry key="app/src/main/res/layout/activity_view_patient_details.xml" value="0.23822463768115942" />
+        <entry key="app/src/main/res/layout/approve_appointment_doctor_item.xml" value="0.245018115942029" />
+        <entry key="app/src/main/res/layout/content_main.xml" value="0.25" />
         <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.20272108843537415" />
         <entry key="app/src/main/res/menu/add_prescription_menu.xml" value="0.2947916666666667" />
         <entry key="app/src/main/res/menu/main.xml" value="0.2947916666666667" />

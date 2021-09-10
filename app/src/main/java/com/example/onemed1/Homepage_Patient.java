@@ -96,7 +96,9 @@ public class Homepage_Patient extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-//                    callAmbulance();
+                Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                callIntent.setData(Uri.parse("tel:" + "+917008000094"));
+                startActivity(callIntent);
                 }
             });
         mBookApp.setOnClickListener(new View.OnClickListener() {
