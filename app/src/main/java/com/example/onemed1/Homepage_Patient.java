@@ -40,10 +40,17 @@ public class Homepage_Patient extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage_patient);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        if(FirebaseAuth.getInstance().getCurrentUser() == null) {
-            mAuthMail = "cst.20bcta16@gmail.ac.in";
-        } else {
-            mAuthMail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+//        if(FirebaseAuth.getInstance().getCurrentUser() == null) {
+//            mAuthMail = "cst.20bcta16@gmail.ac.in";
+//        } else {
+//            mAuthMail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+//        }
+        mAuthMail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        SessionManager manager;
+        manager = new SessionManager(getApplicationContext());
+        if(manager.getUserLogin())
+        {
+            mAuthMail=manager.getPhone();
         }
         mDatabase = FirebaseDatabase.getInstance();
         mRef = mDatabase.getReference("Login Info");

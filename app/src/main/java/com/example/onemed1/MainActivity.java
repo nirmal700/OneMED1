@@ -3,6 +3,7 @@ package com.example.onemed1;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.widget.AdapterView;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
     public static String email;
+    public static String password;
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
     EditText mEmail,mPassword;
@@ -68,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     Spinner spinner;
     public static final String USER_NAME = "com.example.onemed1.username";
     public static final String USER_MAIL = "com.example.onemed1.username.mail";
+    SessionManager manager;
 
 
     @Override
@@ -107,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         mCreateBtn = findViewById(R.id.createText);
         fab = findViewById(R.id.fab);
         progressBar.setVisibility(View.GONE);
+        manager = new SessionManager(getApplicationContext());
         //Intent of sending the email when the user clicks the sos button
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,12 +128,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
             }
         });
+        checksession();
         //On clicking the login button the use will be re-directed to the selected login homepage
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 email = mEmail.getText().toString().trim();
-                String password = mPassword.getText().toString().trim();
+                password = mPassword.getText().toString().trim();
                 if (TextUtils.isEmpty(email)) {
                     mEmail.setError("Email is Required.");
                     return;
@@ -162,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 {
                     //chekcing the login id and password for the organisation and the login for organisation should always be numeric
                     if(TextUtils.isDigitsOnly(email))
-                    validate_organisation(email,password);
+                        validate_organisation(email,password);
                     else
                     {
                         mEmail.setError("For organisation and the pharmacy the email should only be numeric");
@@ -170,26 +175,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     }
                 }
                 if(sn==0||sn==3) {
-                    //comparing the entered user id and password with the registered user in the firebase and autheticating the login process for the patient
-                    fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(MainActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(MainActivity.this, Homepage_Patient.class);
-                                intent.putExtra(USER_MAIL,email);
-                                startActivity(intent);
-                                progressBar.setVisibility(View.GONE);
-                            } else {
-                                Toast.makeText(MainActivity.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                progressBar.setVisibility(View.GONE);
-                            }
-
-                        }
-
-                    });
+                    LoginFauthEmail(email,password);
                 }
             }
+
         });
         //Transferring the user to register if he doesnot have any account
         mCreateBtn.setOnClickListener(new View.OnClickListener() {
@@ -197,6 +186,28 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), Register.class));
             }
+        });
+    }
+    public void LoginFauthEmail(String mEm,String mPS) {
+        //comparing the entered user id and password with the registered user in the firebase and autheticating the login process for the patient
+        fAuth.signInWithEmailAndPassword(mEm, mPS).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    manager.setUserLogin(true);
+                    manager.setDetails(email,password,sn,"");
+                    Toast.makeText(MainActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, Homepage_Patient.class);
+                    intent.putExtra(USER_MAIL,email);
+                    startActivity(intent);
+                    progressBar.setVisibility(View.GONE);
+                } else {
+                    Toast.makeText(MainActivity.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
+                }
+
+            }
+
         });
     }
     //Validating the login of the user if he is from the pharmacy by checking the user-id node with the password in the child of the parent node
@@ -210,6 +221,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 oNm = snapshot.child("Name").getValue(String.class);
                 if (oEm != null && oPs != null) {
                     if (oEm.equals(em) && oPs.equals(ps)) {
+                        manager.setUserLogin(true);
+                        manager.setDetails(em,ps,sn,"");
                         Toast.makeText(MainActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(MainActivity.this, Homepage_Pharmacy.class);
                         intent.putExtra(USER_NAME, oNm);
@@ -261,6 +274,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
                     if (oEm != null && oPs != null) {
                         if (oEm.equals(em) && oPs.equals(ps)) {
+                            manager.setUserLogin(true);
+                            manager.setDetails(em,ps,sn,oNm);
                             Toast.makeText(MainActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(MainActivity.this, Homepage_activity.class);
                             intent.putExtra(USER_NAME, oNm);
@@ -280,12 +295,37 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_LONG).show();
-                    }
-                });;
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_LONG).show();
             }
+        });;
+    }
+    public void checksession()
+    {
+        if(manager.getUserLogin())
+        {
+            int type = manager.getLoginType();
+            String mID = manager.getPhone();
+            String mPas = manager.getPassword();
+            if(type==1)
+            {
+                Intent intent = new Intent(MainActivity.this, Homepage_activity.class);
+                startActivity(intent);
+            }
+            else if(type==2)
+            {
+                Intent intent = new Intent(MainActivity.this, Homepage_Pharmacy.class);
+                startActivity(intent);
+            }
+            else if (type==0||type ==3)
+            {
+                Intent intent = new Intent(MainActivity.this, Homepage_Patient.class);
+                startActivity(intent);
+            }
+            Log.e("SHRDPREF",mID+"\t"+mPas+"\t"+type);
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -301,7 +341,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 || super.onSupportNavigateUp();
     }
 
-//For the snipper option choosed and updating the login-style
+    //For the snipper option choosed and updating the login-style
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         snip = spinner.getSelectedItem().toString();
@@ -328,6 +368,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
 }
+
 
 
 

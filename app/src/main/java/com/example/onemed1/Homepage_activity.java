@@ -35,8 +35,9 @@ public class Homepage_activity extends AppCompatActivity {
         mApprove=findViewById(R.id.button_approve_appointments);
         mPending=findViewById(R.id.button_pending_appointments);
         mCompleted=findViewById(R.id.button_completed_appointments);
-        Intent intent = getIntent();
-        name = intent.getStringExtra(MainActivity.USER_NAME);
+        SessionManager manager;
+        manager = new SessionManager(getApplicationContext());
+        name = manager.getDocName();
 //        String mail= intent.getStringExtra(MainActivity.USER_MAIL);
 //        mRef.orderByChild("Email").equalTo("cst.20bcta16@gmail.com").addValueEventListener(new ValueEventListener() {
 //            @Override
